@@ -23,6 +23,6 @@ namespace OnlineForum.Models
 
         public DateTime CreatedAt { get; set; }
 
-        public ICollection<User> Subscribers { get; set; }
+        public ICollection<UserSettings> Subscribers { get; set; }
     }
 }
