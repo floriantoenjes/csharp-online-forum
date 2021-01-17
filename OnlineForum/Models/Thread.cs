@@ -11,10 +11,18 @@ namespace OnlineForum.Models
 
         public string Name { get; set; }
 
+        public int CreatorId { get; set; }
+
         public User Creator { get; set; }
+
+        public int BoardId { get; set; }
+
+        public Board Board { get; set; }
 
         public ICollection<Post> posts { get; set; } = new List<Post>();
 
         public DateTime CreatedAt { get; set; }
+
+        public ICollection<User> Subscribers { get; set; }
     }
 }

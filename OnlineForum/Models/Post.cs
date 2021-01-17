@@ -11,7 +11,13 @@ namespace OnlineForum.Models
 
         public string Content { get; set; }
 
+        public int CreatorId { get; set; }
+
         public User Creator { get; set; }
+
+        public int ThreadId { get; set; }
+
+        public Thread Thread { get; set; }
 
         public DateTime CreatedAt { get; set; }
     }

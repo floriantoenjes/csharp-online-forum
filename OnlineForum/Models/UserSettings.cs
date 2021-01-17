@@ -10,5 +10,9 @@ namespace OnlineForum.Models
         public int Id { get; set; }
 
         public ICollection<Thread> Subscriptions { get; set; } = new List<Thread>();
+
+        public int UserId { get; set; }
+
+        public User User { get; set; }
     }
 }
