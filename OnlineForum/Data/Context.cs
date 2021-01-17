@@ -27,17 +27,20 @@ namespace OnlineForum.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>()
-                .HasMany<PrivateMessage>(u => u.MessagesSent)
-                .WithOne(pm => pm.Sender);
+            modelBuilder.Entity<PrivateMessage>()
+                .HasOne<User>(pm => pm.Sender)
+                .WithMany(u => u.MessagesSent)
+                .OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<User>()
-                .HasMany<PrivateMessage>(u => u.MessagesReceived)
-                .WithOne(pm => pm.Recipient);
+            modelBuilder.Entity<PrivateMessage>()
+                .HasOne<User>(pm => pm.Recipient)
+                .WithMany(u => u.MessagesReceived)
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<User>()
                 .HasMany<Thread>(u => u.Threads)
-                .WithOne(t => t.Creator);
+                .WithOne(t => t.Creator)
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }
