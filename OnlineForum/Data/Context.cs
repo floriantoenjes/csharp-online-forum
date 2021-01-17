@@ -27,7 +27,17 @@ namespace OnlineForum.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<User>()
+                .HasMany<PrivateMessage>(u => u.MessagesSent)
+                .WithOne(pm => pm.Sender);
+
+            modelBuilder.Entity<User>()
+                .HasMany<PrivateMessage>(u => u.MessagesReceived)
+                .WithOne(pm => pm.Recipient);
+
+            modelBuilder.Entity<User>()
+                .HasMany<Thread>(u => u.Threads)
+                .WithOne(t => t.Creator);
         }
     }
 }

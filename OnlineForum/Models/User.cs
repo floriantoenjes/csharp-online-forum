@@ -25,7 +25,7 @@ namespace OnlineForum.Models
 
         public ICollection<PrivateMessage> MessagesReceived { get; set; } = new List<PrivateMessage>();
 
-        public Role RoleId { get; set; }
+        public int RoleId { get; set; }
 
         public Role UserRole { get; set; }
 
