@@ -9,6 +9,8 @@ namespace OnlineForum.Data
 {
     public class Context : DbContext
     {
+        public Context(DbContextOptions<Context> options) : base(options) { }
+
         public DbSet<Board> Boards { get; set; }
 
         public DbSet<Thread> Threads { get; set; }
