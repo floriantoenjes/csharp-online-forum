@@ -47,6 +47,8 @@ namespace OnlineForum.Controllers
         [HttpPost]
         public IActionResult Board(int boardId, Thread thread)
         {
+            thread.CreatorId = 2; // TODO: Replace with actual user
+            
             var board = _boardService.GetBoard(boardId);
             board.Threads.Add(thread);
             _boardService.UpdateBoard(board);
