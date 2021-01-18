@@ -31,5 +31,10 @@ namespace OnlineForum.Services
             return _boardRepository.Get(boardId);
         }
 
+        public void UpdateBoard(Board board)
+        {
+            _boardRepository.Update(board);
+        }
+
     }
 }

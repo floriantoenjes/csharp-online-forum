@@ -44,6 +44,16 @@ namespace OnlineForum.Controllers
             return View();
         }
 
+        [HttpPost]
+        public IActionResult Board(int boardId, Thread thread)
+        {
+            var board = _boardService.GetBoard(boardId);
+            board.Threads.Add(thread);
+            _boardService.UpdateBoard(board);
+
+            return RedirectToAction("Board", new { boardId });
+        }
+
         public IActionResult Privacy()
         {
             return View();
