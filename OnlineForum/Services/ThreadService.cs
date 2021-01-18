@@ -31,5 +31,10 @@ namespace OnlineForum.Services
             _boardRepository.Update(board);
         }
 
+        public void UpdateThread(Thread thread)
+        {
+            _threadRepository.Update(thread);
+        }
+
     }
 }

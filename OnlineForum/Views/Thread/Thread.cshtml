@@ -8,19 +8,21 @@
     <ul>
         @foreach (var post in ViewBag.Thread.Posts)
         {
-            <li>@post.Content</li>
+            <p>@post.Content</p>
+            <p>by @post.Creator.Username</p>
         }
     </ul>
 </div>
 
-<div>
+<div class="container">
     @using (Html.BeginForm())
     {
-        <div class="form-group">
-            @Html.LabelFor(post => post.Content, new { @class = "control-label" })
-            @Html.TextBoxFor(post => post.Content, new { @class= "form-control" } )
+        <div class="row">
+            <div class="col-6 form-group">
+                @Html.LabelFor(post => post.Content, new {@class = "control-label"})
+                @Html.TextAreaFor(post => post.Content, new {@class = "form-control"})
+            </div>
         </div>
-        
         <button class="btn btn-primary" type="submit">Create Post</button>
     }
 </div>

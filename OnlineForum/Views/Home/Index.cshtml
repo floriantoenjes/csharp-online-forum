@@ -5,27 +5,27 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Hello, C# World!</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
-
-<div>
-    @using (Html.BeginForm())
-    {
-        <div class="form-group">
-            @Html.LabelFor(b => b.Name, new { @class = "control-label" })
-            @Html.TextBoxFor(b => b.Name, new { @class = "form-control"})
-        </div>
-
-        <button class="btn btn-primary" type="submit">Create Board</button>
-    }
+    <h1 class="display-4">The best Online Forum</h1>
 </div>
 
 <div>
     <ul>
         @foreach (var board in ViewBag.Boards)
         {
-            <li>@Html.ActionLink((string) board.Name, "Board", "Home", new { boardId = board.Id })</li>
+            <li>@Html.ActionLink((string) board.Name, "Board", "Home", new {boardId = board.Id})</li>
         }
     </ul>
+</div>
+
+<div class="container">
+    @using (Html.BeginForm())
+    {
+        <div class="row">
+            <div class="col-4 form-group">
+                @Html.LabelFor(b => b.Name, new {@class = "control-label"})
+                @Html.TextBoxFor(b => b.Name, new {@class = "form-control"})
+            </div>
+        </div>
+        <button class="btn btn-primary" type="submit">Create Board</button>
+    }
 </div>

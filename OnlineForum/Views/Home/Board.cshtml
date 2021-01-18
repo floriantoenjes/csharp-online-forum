@@ -4,23 +4,25 @@
     <h1 class="display-4">@ViewBag.Board.Name</h1>
 </div>
 
-<div>
-    <ul>
+<div class="container">
+    <div class="row">
         @foreach (var thread in ViewBag.Board.Threads)
         {
-            <li>@Html.ActionLink((string) thread.Name, "Thread", "Thread", new { threadId = thread.Id })</li>
+            <p class="col-6">@Html.ActionLink((string) thread.Name, "Thread", "Thread", new {threadId = thread.Id})</p>
+            <p class="col-6">by @thread.Creator.Username</p>
         }
-    </ul>
+    </div>
 </div>
 
-<div>
+<div class="container">
     @using (Html.BeginForm())
     {
-        <div class="form-group">
-            @Html.LabelFor(thread => thread.Name, new { @class = "control-label" })
-            @Html.TextBoxFor(thread => thread.Name, new { @class= "form-control" } )
+        <div class="row">
+            <div class="col-6 form-group">
+                @Html.LabelFor(thread => thread.Name, new {@class = "control-label"})
+                @Html.TextBoxFor(thread => thread.Name, new {@class = "form-control"})
+            </div>
         </div>
-        
         <button class="btn btn-primary" type="submit">Create Thread</button>
     }
 </div>

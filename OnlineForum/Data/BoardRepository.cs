@@ -14,7 +14,7 @@ namespace OnlineForum.Data
         public override Board Get(int id)
         {
             return Context.Boards.Where(board => board.Id == id)
-                .Include(board => board.Threads).SingleOrDefault();
+                .Include(board => board.Threads).ThenInclude(thread => thread.Creator).SingleOrDefault();
         }
 
         public override IList<Board> GetList()
