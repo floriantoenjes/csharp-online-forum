@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace OnlineForum.Data
 {
-    public class BaseRepository<TDbContext, TEntity> : IBaseRepository<TEntity> where TDbContext : DbContext where TEntity : class
+    public abstract class BaseRepository<TDbContext, TEntity> : IBaseRepository<TEntity> where TDbContext : DbContext where TEntity : class
     {
         protected TDbContext Context { get; set; }
 
-        public BaseRepository(TDbContext context)
+        protected BaseRepository(TDbContext context)
         {
             Context = context;
         }
@@ -28,15 +28,9 @@ namespace OnlineForum.Data
             Context.SaveChanges();
         }
 
-        public TEntity Get(int id)
-        {
-            return Context.Find<TEntity>(id);
-        }
+        public abstract TEntity Get(int id);
 
-        public IList<TEntity> GetList()
-        {
-            return Context.Set<TEntity>().ToList();
-        }
+        public abstract IList<TEntity> GetList();
 
         public void Update(TEntity entity)
         {

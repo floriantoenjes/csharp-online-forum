@@ -19,7 +19,7 @@ namespace OnlineForum.Models
 
         public Board Board { get; set; }
 
-        public ICollection<Post> posts { get; set; } = new List<Post>();
+        public ICollection<Post> Posts { get; set; } = new List<Post>();
 
         public DateTime CreatedAt { get; set; }
 

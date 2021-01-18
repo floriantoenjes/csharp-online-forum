@@ -33,8 +33,8 @@ namespace OnlineForum
 
             services.AddScoped<DbContext, Context>();
             
-            services.AddScoped<IBaseRepository<Board>, BaseRepository<DbContext, Board>>();
-            services.AddScoped<IBaseRepository<Thread>, BaseRepository<DbContext, Thread>>();
+            services.AddScoped<IBaseRepository<Board>, BoardRepository>();
+            services.AddScoped<IBaseRepository<Thread>, ThreadRepository>();
 
             services.AddScoped<BoardService>();
             services.AddScoped<ThreadService>();
