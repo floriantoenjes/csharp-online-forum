@@ -21,5 +21,10 @@ namespace OnlineForum.Services
             return _boardRepository.GetList();
         }
 
+        public void CreateBoard(Board board)
+        {
+            _boardRepository.Add(board);
+        }
+
     }
 }

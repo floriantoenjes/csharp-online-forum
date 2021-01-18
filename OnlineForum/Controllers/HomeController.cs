@@ -28,6 +28,12 @@ namespace OnlineForum.Controllers
             return View();
         }
 
+        [HttpPost]
+        public void Index(Board board)
+        {
+            _boardService.CreateBoard(board);
+        }
+
         public IActionResult Privacy()
         {
             return View();

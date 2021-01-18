@@ -32,8 +32,12 @@ namespace OnlineForum
             services.AddDbContext<Context>(options => options.UseSqlServer(Configuration.GetConnectionString("ForumContext")));
 
             services.AddScoped<DbContext, Context>();
+            
             services.AddScoped<IBaseRepository<Board>, BaseRepository<DbContext, Board>>();
+            services.AddScoped<IBaseRepository<Thread>, BaseRepository<DbContext, Thread>>();
+
             services.AddScoped<BoardService>();
+            services.AddScoped<ThreadService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,4 +1,6 @@
-﻿@{
+﻿@model OnlineForum.Models.Board
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -8,10 +10,22 @@
 </div>
 
 <div>
+    @using (Html.BeginForm())
+    {
+        <div class="form-group">
+            @Html.LabelFor(b => b.Name, new { @class = "control-label" })
+            @Html.TextBoxFor(b => b.Name, new { @class = "form-control"})
+        </div>
+
+        <button class="btn btn-primary" type="submit">Create Board</button>
+    }
+</div>
+
+<div>
     <ul>
         @foreach (var board in ViewBag.Boards)
         {
-            <li>@board.name</li>
+            <li>@board.Name</li>
         }
     </ul>
 </div>
