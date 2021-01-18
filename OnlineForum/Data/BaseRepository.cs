@@ -6,13 +6,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace OnlineForum.Data
 {
-    public abstract class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class
+    public abstract class BaseRepository<TDbContext, TEntity> : IBaseRepository<TEntity> where TDbContext : DbContext where TEntity : class
     {
-        protected Context Context { get; private set; }
+        protected TDbContext Context { get; private set; }
 
-        public BaseRepository(Context context)
+        public BaseRepository(TDbContext context)
         {
-            this.Context = context;
+            Context = context;
         }
 
         public void Add(TEntity entity)
