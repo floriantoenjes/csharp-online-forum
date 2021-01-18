@@ -26,5 +26,10 @@ namespace OnlineForum.Services
             _boardRepository.Add(board);
         }
 
+        public Board GetBoard(int boardId)
+        {
+            return _boardRepository.Get(boardId);
+        }
+
     }
 }

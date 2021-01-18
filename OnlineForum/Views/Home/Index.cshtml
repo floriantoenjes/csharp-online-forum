@@ -25,7 +25,7 @@
     <ul>
         @foreach (var board in ViewBag.Boards)
         {
-            <li>@board.Name</li>
+            <li>@Html.ActionLink((string) board.Name, "Board", "Home", new { boardId = board.Id })</li>
         }
     </ul>
 </div>

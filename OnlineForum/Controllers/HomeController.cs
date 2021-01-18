@@ -29,9 +29,19 @@ namespace OnlineForum.Controllers
         }
 
         [HttpPost]
-        public void Index(Board board)
+        public IActionResult Index(Board board)
         {
             _boardService.CreateBoard(board);
+
+            return RedirectToAction();
+        }
+
+        public IActionResult Board(int boardId)
+        {
+            var board = _boardService.GetBoard(boardId);
+            ViewBag.Board = board;
+
+            return View();
         }
 
         public IActionResult Privacy()

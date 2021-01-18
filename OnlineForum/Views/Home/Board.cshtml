@@ -1,0 +1,14 @@
+﻿@model OnlineForum.Models.Board
+
+<div class="text-center">
+    <h1 class="display-4">@ViewBag.Board.Name</h1>
+</div>
+
+<div>
+    <ul>
+        @foreach (var thread in ViewBag.Board.Threads)
+        {
+            <li>@thread.Name</li>
+        }
+    </ul>
+</div>
