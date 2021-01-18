@@ -13,7 +13,7 @@ namespace OnlineForum.Data
 
         public override Thread Get(int id)
         {
-            return Context.Threads.Include(thread => thread.Posts).SingleOrDefault();
+            return Context.Threads.Where(thread => thread.Id == id).Include(thread => thread.Posts).SingleOrDefault();
         }
 
         public override IList<Thread> GetList()

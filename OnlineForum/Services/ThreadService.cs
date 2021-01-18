@@ -19,9 +19,9 @@ namespace OnlineForum.Services
             _threadRepository = threadRepository;
         }
 
-        public IList<Thread> GetAllThreadsFromBoard(int boardId)
+        public Thread GetThread(int threadId)
         {
-            return _boardRepository.Get(boardId).Threads.ToList();
+            return _threadRepository.Get(threadId);
         }
 
         public void CreateThread(int boardId, Thread thread)
