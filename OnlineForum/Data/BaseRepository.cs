@@ -6,9 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace OnlineForum.Data
 {
-    public abstract class BaseRepository<TDbContext, TEntity> : IBaseRepository<TEntity> where TDbContext : DbContext where TEntity : class
+    public class BaseRepository<TDbContext, TEntity> : IBaseRepository<TEntity> where TDbContext : DbContext where TEntity : class
     {
-        protected TDbContext Context { get; private set; }
+        protected TDbContext Context { get; set; }
 
         public BaseRepository(TDbContext context)
         {

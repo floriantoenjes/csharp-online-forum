@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using OnlineForum.Models;
+using OnlineForum.Services;
 
 namespace OnlineForum.Controllers
 {
@@ -13,13 +14,17 @@ namespace OnlineForum.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private readonly BoardService _boardService;
+
+        public HomeController(ILogger<HomeController> logger, BoardService boardService)
         {
             _logger = logger;
+            _boardService = boardService;
         }
 
         public IActionResult Index()
         {
+            ViewBag.Boards = _boardService.GetAllBoards();
             return View();
         }
 
