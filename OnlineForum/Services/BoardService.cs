@@ -36,5 +36,9 @@ namespace OnlineForum.Services
             _boardRepository.Update(board);
         }
 
+        public int GetThreadCount()
+        {
+            return _boardRepository.Count();
+        }
     }
 }

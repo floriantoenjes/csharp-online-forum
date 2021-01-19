@@ -16,5 +16,7 @@ namespace OnlineForum.Data
         void Update(TEntity entity);
 
         void Delete(int id);
+
+        int Count();
     }
 }

@@ -17,7 +17,7 @@
                     <article class="row">
                         <div class="col-9">
                             <h4>@Html.ActionLink((string) board.Name, "Board", "Home", new {boardId = board.Id})</h4>
-                            <p></p>
+                            <p>Threads: @board.ThreadCount</p>
                         </div>
                         <aside class="col-3">
                             @if (board.LastThread != null)

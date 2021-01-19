@@ -37,5 +37,10 @@ namespace OnlineForum.Data
             Context.Entry(entity).State = EntityState.Modified;
             Context.SaveChanges();
         }
+
+        public int Count()
+        {
+            return Context.Set<TEntity>().ToList().Count;
+        }
     }
 }

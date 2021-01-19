@@ -53,6 +53,7 @@ namespace OnlineForum.Controllers
             var board = _boardService.GetBoard(boardId);
             board.Threads.Add(thread);
             board.LastThread = thread;
+            board.ThreadCount = _boardService.GetThreadCount();
             _boardService.UpdateBoard(board);
 
             return RedirectToAction("Board", new { boardId });
