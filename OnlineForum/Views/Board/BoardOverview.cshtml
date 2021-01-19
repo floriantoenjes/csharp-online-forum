@@ -16,7 +16,7 @@
                 <div>
                     <article class="row">
                         <div class="col-9">
-                            <h4>@Html.ActionLink((string) board.Name, "Board", "Home", new {boardId = board.Id})</h4>
+                            <h4>@Html.ActionLink((string) board.Name, "BoardDetail", "Board", new {boardId = board.Id})</h4>
                             <p>Threads: @board.ThreadCount</p>
                         </div>
                         <aside class="col-3">
@@ -32,7 +32,7 @@
             }
     </div>
 
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("CreateBoard", "Board"))
     {
         <div class="row">
             <div class="col-4 form-group">

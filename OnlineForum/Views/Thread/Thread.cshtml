@@ -2,7 +2,7 @@
 
 <div class="container">
     <div class="row">
-        <p class="col-3">@Html.ActionLink((string) ViewBag.Thread.Board.Name, "Board", "Home", new {boardId = ViewBag.Thread.Board.Id})</p>
+        <p class="col-3">@Html.ActionLink((string) ViewBag.Thread.Board.Name, "BoardDetail", "Board", new {boardId = ViewBag.Thread.Board.Id})</p>
         <div class="col-6 text-center">
             <h1 class="display-4 mb-4">@ViewBag.Thread.Name</h1>
         </div>

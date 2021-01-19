@@ -40,5 +40,17 @@ namespace OnlineForum.Services
         {
             return _boardRepository.Count();
         }
+
+        public void CreateThread(int boardId, Thread thread)
+        {
+            thread.CreatorId = 1; // TODO: Replace with actual user
+            thread.CreatedAt = DateTime.Now;
+            
+            var board = _boardRepository.Get(boardId);
+            board.Threads.Add(thread);
+            board.LastThread = thread;
+            board.ThreadCount = GetThreadCount();
+            _boardRepository.Update(board);
+        }
     }
 }

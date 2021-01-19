@@ -14,49 +14,14 @@ namespace OnlineForum.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        private readonly BoardService _boardService;
-
-        public HomeController(ILogger<HomeController> logger, BoardService boardService)
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            _boardService = boardService;
         }
-
+        
         public IActionResult Index()
         {
-            ViewBag.Boards = _boardService.GetAllBoards();
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult Index(Board board)
-        {
-            _boardService.CreateBoard(board);
-
-            return RedirectToAction();
-        }
-
-        public IActionResult Board(int boardId)
-        {
-            var board = _boardService.GetBoard(boardId);
-            ViewBag.Board = board;
-
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult Board(int boardId, Thread thread)
-        {
-            thread.CreatorId = 1; // TODO: Replace with actual user
-            thread.CreatedAt = DateTime.Now;
-            
-            var board = _boardService.GetBoard(boardId);
-            board.Threads.Add(thread);
-            board.LastThread = thread;
-            board.ThreadCount = _boardService.GetThreadCount();
-            _boardService.UpdateBoard(board);
-
-            return RedirectToAction("Board", new { boardId });
+            return RedirectToAction("BoardOverview", "Board");
         }
 
         public IActionResult Privacy()

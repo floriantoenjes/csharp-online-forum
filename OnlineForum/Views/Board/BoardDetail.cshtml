@@ -15,7 +15,7 @@
 </div>
 
 <div class="container">
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("CreateThread", "Board", new { boardId = ViewBag.Board.Id }))
     {
         <div class="row">
             <div class="col-6 form-group">
