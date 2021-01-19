@@ -4,20 +4,21 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">The best Online Forum</h1>
-</div>
-
-<div>
-    <ul>
-        @foreach (var board in ViewBag.Boards)
-        {
-            <li>@Html.ActionLink((string) board.Name, "Board", "Home", new {boardId = board.Id})</li>
-        }
-    </ul>
-</div>
-
 <div class="container">
+
+    <div class="text-center">
+        <h1 class="display-4 mb-4">The best Online Forum</h1>
+    </div>
+
+    <div>
+        <ul>
+            @foreach (var board in ViewBag.Boards)
+            {
+                <li>@Html.ActionLink((string) board.Name, "Board", "Home", new {boardId = board.Id})</li>
+            }
+        </ul>
+    </div>
+
     @using (Html.BeginForm())
     {
         <div class="row">

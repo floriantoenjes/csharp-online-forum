@@ -1,26 +1,41 @@
 ﻿@model OnlineForum.Models.Post
 
-<div class="text-center">
-    <h1 class="display-4">@ViewBag.Thread.Name</h1>
-</div>
-
-<div>
-    <ul>
-        @foreach (var post in ViewBag.Thread.Posts)
-        {
-            <p>@post.Content</p>
-            <p>by @post.Creator.Username</p>
-        }
-    </ul>
-</div>
-
 <div class="container">
+    <div class="row">
+        <p class="col-3">@Html.ActionLink((string) ViewBag.Thread.Board.Name, "Board", "Home", new {boardId = ViewBag.Thread.Board.Id})</p>
+        <div class="col-6 text-center">
+            <h1 class="display-4 mb-4">@ViewBag.Thread.Name</h1>
+        </div>
+    </div>
+
+    @foreach (var post in ViewBag.Thread.Posts)
+    {
+        <article class="d-flex p-4 border my-4">
+            <aside class="text-center p-4">
+                <p class="col-6">@post.Creator.Username</p>
+                <p>@post.Creator.PostCount Posts</p>
+            </aside>
+            <div class="w-100">
+                <div class="row">
+                    <p>@post.CreatedAt</p>
+                </div>
+                <div class="row">
+                    <p class="col-12 p-0">@post.Content</p>
+                </div>
+                <hr>
+                <div class="row">
+                    <p>@post.Creator.Signature</p>
+                </div>
+            </div>
+        </article>
+    }
+
     @using (Html.BeginForm())
     {
         <div class="row">
-            <div class="col-6 form-group">
+            <div class="col-12 form-group">
                 @Html.LabelFor(post => post.Content, new {@class = "control-label"})
-                @Html.TextAreaFor(post => post.Content, new {@class = "form-control"})
+                @Html.TextAreaFor(post => post.Content, new {@class = "form-control", @rows=5})
             </div>
         </div>
         <button class="btn btn-primary" type="submit">Create Post</button>

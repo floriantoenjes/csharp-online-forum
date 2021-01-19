@@ -14,6 +14,7 @@ namespace OnlineForum.Data
         public override Thread Get(int id)
         {
             return Context.Threads.Where(thread => thread.Id == id)
+                .Include(thread => thread.Board)
                 .Include(thread => thread.Posts)
                 .Include(thread => thread.Creator).SingleOrDefault();
         }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using OnlineForum.Models;
 using OnlineForum.Services;
 
@@ -25,7 +26,8 @@ namespace OnlineForum.Controllers
         public IActionResult Thread(int threadId, Post post)
         {
             post.CreatorId = 2; // TODO: Replace with actual user
-
+            post.CreatedAt = DateTime.Now;
+            
             var thread = _threadService.GetThread(threadId);
             thread.Posts.Add(post);
             _threadService.UpdateThread(thread);
