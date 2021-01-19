@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using OnlineForum.Data;
+using OnlineForum.Models;
 
 namespace OnlineForum
 {
@@ -37,7 +38,15 @@ namespace OnlineForum
                 try
                 {
                     var context = services.GetRequiredService<Context>();
+
+                    var dbAlreadyCreated = context.Database.CanConnect();
+                    
                     context.Database.EnsureCreated();
+                    
+                    if (!dbAlreadyCreated)
+                    {
+                        SeedDatabase(context);
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -45,6 +54,26 @@ namespace OnlineForum
                     logger.LogError(ex, "An error ocurred creating the DB.");
                 }
             }
+        }
+
+        private static void SeedDatabase(Context context)
+        {
+            var adminRole = new Role();
+            adminRole.Name = "Admin";
+            context.Roles.Add(adminRole);
+            
+            var florian = new User();
+            florian.Username = "Florian";
+            florian.Signature = "Cool Signature";
+            florian.PostCount = 0;
+            florian.Reputation = 0;
+            florian.LastSeen = DateTime.Now;
+            florian.JoinedAt = DateTime.Now;
+            florian.UserRole = adminRole;
+            context.Users.Add(florian);
+
+            context.SaveChanges();
+
         }
     }
 }

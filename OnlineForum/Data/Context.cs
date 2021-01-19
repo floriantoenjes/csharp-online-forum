@@ -41,6 +41,11 @@ namespace OnlineForum.Data
                 .HasMany<Thread>(u => u.Threads)
                 .WithOne(t => t.Creator)
                 .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Thread>()
+                .HasOne<Board>(t => t.LastThreadOn)
+                .WithOne(b => b.LastThread)
+                .HasForeignKey<Board>("LastThreadId");
         }
     }
 }

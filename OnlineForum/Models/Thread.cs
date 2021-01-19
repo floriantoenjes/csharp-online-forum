@@ -18,6 +18,8 @@ namespace OnlineForum.Models
         public int BoardId { get; set; }
 
         public Board Board { get; set; }
+        
+        public Board LastThreadOn { get; set; }
 
         public ICollection<Post> Posts { get; set; } = new List<Post>();
 

@@ -12,5 +12,11 @@ namespace OnlineForum.Models
         public string Name { get; set; }
 
         public ICollection<Thread> Threads { get; set; } = new List<Thread>();
+        
+        public int? LastThreadId { get; set; }
+        
+        public Thread LastThread { get; set; }
+        
+        public int ThreadCount { get; set; }
     }
 }

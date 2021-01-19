@@ -47,10 +47,12 @@ namespace OnlineForum.Controllers
         [HttpPost]
         public IActionResult Board(int boardId, Thread thread)
         {
-            thread.CreatorId = 2; // TODO: Replace with actual user
+            thread.CreatorId = 1; // TODO: Replace with actual user
+            thread.CreatedAt = DateTime.Now;
             
             var board = _boardService.GetBoard(boardId);
             board.Threads.Add(thread);
+            board.LastThread = thread;
             _boardService.UpdateBoard(board);
 
             return RedirectToAction("Board", new { boardId });

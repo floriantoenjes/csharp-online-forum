@@ -14,12 +14,15 @@ namespace OnlineForum.Data
         public override Board Get(int id)
         {
             return Context.Boards.Where(board => board.Id == id)
-                .Include(board => board.Threads).ThenInclude(thread => thread.Creator).SingleOrDefault();
+                .Include(board => board.LastThread)
+                .Include(board => board.Threads).ThenInclude(thread => thread.Creator)
+                .SingleOrDefault();
         }
 
         public override IList<Board> GetList()
         {
-            return Context.Boards.ToList();
+            return Context.Boards.Include(b => b.LastThread)
+                .ThenInclude(t => t.Creator).ToList();
         }
     }
 }

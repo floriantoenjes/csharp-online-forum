@@ -25,7 +25,7 @@ namespace OnlineForum.Controllers
         [HttpPost]
         public IActionResult Thread(int threadId, Post post)
         {
-            post.CreatorId = 2; // TODO: Replace with actual user
+            post.CreatorId = 1; // TODO: Replace with actual user
             post.CreatedAt = DateTime.Now;
             
             var thread = _threadService.GetThread(threadId);
