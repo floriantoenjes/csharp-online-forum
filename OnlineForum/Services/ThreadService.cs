@@ -13,10 +13,17 @@ namespace OnlineForum.Services
 
         private readonly IBaseRepository<Thread> _threadRepository;
 
-        public ThreadService(IBaseRepository<Board> boardRepository, IBaseRepository<Thread> threadRepository)
+        private readonly IBaseRepository<User> _userRepository;
+
+        public ThreadService(
+            IBaseRepository<Board> boardRepository,
+            IBaseRepository<Thread> threadRepository,
+            IBaseRepository<User> userRepository
+            )
         {
             _boardRepository = boardRepository;
             _threadRepository = threadRepository;
+            _userRepository = userRepository;
         }
 
         public Thread GetThread(int threadId)
@@ -36,5 +43,18 @@ namespace OnlineForum.Services
             _threadRepository.Update(thread);
         }
 
+        public void CreatePost(int threadId, Post post)
+        {
+            post.CreatorId = 1; // TODO: Replace with actual user
+            post.CreatedAt = DateTime.Now;
+
+            var user = _userRepository.Get(1);
+            user.PostCount += 1;
+            _userRepository.Update(user);
+
+            var thread = GetThread(threadId);
+            thread.Posts.Add(post);
+            UpdateThread(thread);
+        }
     }
 }

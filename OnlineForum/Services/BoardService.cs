@@ -46,11 +46,11 @@ namespace OnlineForum.Services
             thread.CreatorId = 1; // TODO: Replace with actual user
             thread.CreatedAt = DateTime.Now;
             
-            var board = _boardRepository.Get(boardId);
+            var board = GetBoard(boardId);
             board.Threads.Add(thread);
             board.LastThread = thread;
             board.ThreadCount = GetThreadCount();
-            _boardRepository.Update(board);
+            UpdateBoard(board);
         }
     }
 }
