@@ -39,6 +39,7 @@ namespace OnlineForum
 
             services.AddScoped<BoardService>();
             services.AddScoped<ThreadService>();
+            services.AddScoped<UserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
