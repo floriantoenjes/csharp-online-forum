@@ -25,7 +25,10 @@ namespace OnlineForum.Controllers
         [HttpPost]
         public IActionResult Thread(int threadId, Post post)
         {
-            _threadService.CreatePost(threadId, post);
+            if (ModelState.IsValid)
+            {
+                _threadService.CreatePost(threadId, post);
+            }
 
             return RedirectToAction("Thread", new {threadId});
             

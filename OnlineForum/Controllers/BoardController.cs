@@ -23,7 +23,10 @@ namespace OnlineForum.Controllers
         [HttpPost]
         public IActionResult CreateBoard(Board board)
         {
-            _boardService.CreateBoard(board);
+            if (ModelState.IsValid)
+            {
+                _boardService.CreateBoard(board);
+            }
 
             return RedirectToAction("BoardOverview");
         }
@@ -39,7 +42,10 @@ namespace OnlineForum.Controllers
         [HttpPost]
         public IActionResult CreateThread(int boardId, Thread thread)
         {
-            _boardService.CreateThread(boardId, thread);
+            if (ModelState.IsValid)
+            {
+                _boardService.CreateThread(boardId, thread);
+            }
 
             return RedirectToAction("BoardDetail", new { boardId });
         }
