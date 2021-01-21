@@ -48,6 +48,8 @@ namespace OnlineForum.Controllers
             if (ModelState.IsValid)
             {
                 _boardService.CreateThread(boardId, boardDetailViewModel.Thread, boardDetailViewModel.Post);
+                return RedirectToAction("Thread", "Thread", new { threadId = boardDetailViewModel.Thread.Id });
+
             }
 
             return RedirectToAction("BoardDetail", new { boardId });
