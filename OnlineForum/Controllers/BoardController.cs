@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineForum.Models;
 using OnlineForum.Services;
+using OnlineForum.ViewModels;
 
 namespace OnlineForum.Controllers
 {
@@ -34,17 +35,19 @@ namespace OnlineForum.Controllers
         public IActionResult BoardDetail(int boardId)
         {
             var board = _boardService.GetBoard(boardId);
-            ViewBag.Board = board;
+            
+            var boardDetailViewModel = new BoardDetailViewModel();
+            boardDetailViewModel.Board = board;
 
-            return View();
+            return View(boardDetailViewModel);
         }
 
         [HttpPost]
-        public IActionResult CreateThread(int boardId, Thread thread)
+        public IActionResult CreateThread(int boardId, BoardDetailViewModel boardDetailViewModel)
         {
             if (ModelState.IsValid)
             {
-                _boardService.CreateThread(boardId, thread);
+                _boardService.CreateThread(boardId, boardDetailViewModel.Thread, boardDetailViewModel.Post);
             }
 
             return RedirectToAction("BoardDetail", new { boardId });

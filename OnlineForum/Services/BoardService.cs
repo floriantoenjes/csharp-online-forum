@@ -41,11 +41,15 @@ namespace OnlineForum.Services
             return _boardRepository.Count();
         }
 
-        public void CreateThread(int boardId, Thread thread)
+        public void CreateThread(int boardId, Thread thread, Post post)
         {
+            post.CreatorId = 1;
+            post.CreatedAt = DateTime.Now;
+            
             thread.CreatorId = 1; // TODO: Replace with actual user
             thread.CreatedAt = DateTime.Now;
-            
+            thread.Posts.Add(post);
+
             var board = GetBoard(boardId);
             board.Threads.Add(thread);
             board.LastThread = thread;

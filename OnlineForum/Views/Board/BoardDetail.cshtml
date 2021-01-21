@@ -1,15 +1,15 @@
-﻿@model OnlineForum.Models.Thread
+﻿@model OnlineForum.ViewModels.BoardDetailViewModel
 
 <div class="container">
     <div class="row">
         <p class="col-3">@Html.ActionLink("Board Overview", "BoardOverview", "Board")</p>
         <div class="text-center col-12">
-            <h1 class="display-4 mb-4">@ViewBag.Board.Name</h1>
+            <h1 class="display-4 mb-4">@Model.Board.Name</h1>
         </div>
     </div>
 
     <div>
-        @foreach (var thread in ViewBag.Board.Threads)
+        @foreach (var thread in Model.Board.Threads)
         {
             <article class="row border p-4 my-4">
                 <div class="col-9">
@@ -25,14 +25,22 @@
 </div>
 
 <div class="container">
-    @using (Html.BeginForm("CreateThread", "Board", new {boardId = ViewBag.Board.Id}))
+    @using (Html.BeginForm("CreateThread", "Board", new {boardId = Model.Board.Id}))
     {
         <div class="row">
             <div class="col-6 form-group">
-                @Html.LabelFor(thread => thread.Name, new {@class = "control-label"})
-                @Html.TextBoxFor(thread => thread.Name, new {@class = "form-control"})
+                @Html.LabelFor(m => m.Thread.Name, new {@class = "control-label"})
+                @Html.TextBoxFor(m => m.Thread.Name, new {@class = "form-control"})
             </div>
         </div>
+        
+        <div class="row">
+            <div class="col-6 form-group">
+                @Html.LabelFor(m => m.Post.Content, new {@class = "control-label"})
+                @Html.TextAreaFor(m => m.Post.Content, new {@class = "form-control"})
+            </div>
+        </div>
+        
         <button class="btn btn-primary" type="submit">Create Thread</button>
     }
 </div>
