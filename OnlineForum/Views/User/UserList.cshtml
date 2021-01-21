@@ -1,5 +1,25 @@
-﻿
-@foreach (var user in ViewBag.Users)
-{
-    <p>@user.Username</p>
-}
+﻿<div class="container">
+
+    <div class="text-center">
+        <h1 class="display-4 mb-4">User List</h1>
+    </div>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Username</th>
+            <th scope="col">Number of Posts</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var user in ViewBag.Users)
+        {
+            <tr>
+                <td>@user.Username</td>
+                <td>@user.PostCount</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+
+</div>
