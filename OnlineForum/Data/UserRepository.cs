@@ -13,7 +13,10 @@ namespace OnlineForum.Data
 
         public override User Get(int id)
         {
-            return Context.Users.SingleOrDefault(user => user.Id == id);
+            return Context.Users
+                .Include(u => u.Settings)
+                .ThenInclude(us => us.Subscriptions)
+                .SingleOrDefault(user => user.Id == id);
         }
 
         public override IList<User> GetList()

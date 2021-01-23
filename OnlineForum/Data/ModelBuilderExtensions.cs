@@ -20,6 +20,12 @@ namespace OnlineForum.Data
                     Id = 1, RoleId = 1, Username = "Florian", Signature = "Cool Signature", PostCount = 0,
                     LastSeen = DateTime.Now, JoinedAt = DateTime.Now
                 });
+
+            modelBuilder.Entity<UserSettings>()
+                .HasData(new UserSettings
+                {
+                    Id = 1, UserId = 1
+                });
             
         }
     }
