@@ -46,6 +46,8 @@ namespace OnlineForum.Services
 
         public void CreateThread(int boardId, Thread thread, Post post)
         {
+            var transaction = _boardRepository.StartTransaction();
+
             thread.CreatorId = 1; // TODO: Replace with actual user
             thread.CreatedAt = DateTime.Now;
 
@@ -56,6 +58,8 @@ namespace OnlineForum.Services
             UpdateBoard(board);
             
             _threadService.CreatePost(thread.Id, post);
+
+            transaction.Commit();
         }
     }
 }

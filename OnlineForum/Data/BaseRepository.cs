@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace OnlineForum.Data
 {
@@ -42,5 +43,11 @@ namespace OnlineForum.Data
         {
             return Context.Set<TEntity>().ToList().Count;
         }
+
+        public IDbContextTransaction StartTransaction()
+        {
+            return Context.Database.BeginTransaction();
+        }
+        
     }
 }

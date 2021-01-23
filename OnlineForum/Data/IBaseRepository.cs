@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace OnlineForum.Data
 {
@@ -18,5 +19,7 @@ namespace OnlineForum.Data
         void Delete(int id);
 
         int Count();
+
+        IDbContextTransaction StartTransaction();
     }
 }
