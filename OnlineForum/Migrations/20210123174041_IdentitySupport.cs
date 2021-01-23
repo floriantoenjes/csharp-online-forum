@@ -47,10 +47,25 @@ namespace OnlineForum.Migrations
                 name: "Roles",
                 newName: "AspNetRoles");
 
+            migrationBuilder.RenameColumn(
+                name: "Username",
+                table: "AspNetUsers",
+                newName: "UserName");
+
             migrationBuilder.RenameIndex(
                 name: "IX_Users_RoleId",
                 table: "AspNetUsers",
                 newName: "IX_AspNetUsers_RoleId");
+
+            migrationBuilder.AlterColumn<string>(
+                name: "UserName",
+                table: "AspNetUsers",
+                type: "nvarchar(256)",
+                maxLength: 256,
+                nullable: true,
+                oldClrType: typeof(string),
+                oldType: "nvarchar(max)",
+                oldNullable: true);
 
             migrationBuilder.AddColumn<int>(
                 name: "AccessFailedCount",
@@ -137,13 +152,6 @@ namespace OnlineForum.Migrations
                 type: "bit",
                 nullable: false,
                 defaultValue: false);
-
-            migrationBuilder.AddColumn<string>(
-                name: "UserName",
-                table: "AspNetUsers",
-                type: "nvarchar(256)",
-                maxLength: 256,
-                nullable: true);
 
             migrationBuilder.AlterColumn<string>(
                 name: "Name",
@@ -288,14 +296,14 @@ namespace OnlineForum.Migrations
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "ConcurrencyStamp",
-                value: "9479b973-2e00-45fe-b945-100157de3e7a");
+                value: "63a563e1-3346-4355-a35d-c35969061c31");
 
             migrationBuilder.UpdateData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
                 keyValue: 1,
                 columns: new[] { "ConcurrencyStamp", "JoinedAt", "LastSeen" },
-                values: new object[] { "6d4e144f-4782-492c-9f18-80cc85b526c7", new DateTime(2021, 1, 23, 18, 27, 4, 51, DateTimeKind.Local).AddTicks(9205), new DateTime(2021, 1, 23, 18, 27, 4, 50, DateTimeKind.Local).AddTicks(2385) });
+                values: new object[] { "00472b67-7067-4ce8-95e8-3cbc1eaeb521", new DateTime(2021, 1, 23, 18, 40, 40, 951, DateTimeKind.Local).AddTicks(2887), new DateTime(2021, 1, 23, 18, 40, 40, 949, DateTimeKind.Local).AddTicks(5319) });
 
             migrationBuilder.CreateIndex(
                 name: "EmailIndex",
@@ -341,8 +349,7 @@ namespace OnlineForum.Migrations
                 table: "AspNetUsers",
                 column: "RoleId",
                 principalTable: "AspNetRoles",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                principalColumn: "Id");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Posts_AspNetUsers_CreatorId",
@@ -496,10 +503,6 @@ namespace OnlineForum.Migrations
                 table: "AspNetUsers");
 
             migrationBuilder.DropColumn(
-                name: "UserName",
-                table: "AspNetUsers");
-
-            migrationBuilder.DropColumn(
                 name: "ConcurrencyStamp",
                 table: "AspNetRoles");
 
@@ -515,10 +518,25 @@ namespace OnlineForum.Migrations
                 name: "AspNetRoles",
                 newName: "Roles");
 
+            migrationBuilder.RenameColumn(
+                name: "UserName",
+                table: "Users",
+                newName: "Username");
+
             migrationBuilder.RenameIndex(
                 name: "IX_AspNetUsers_RoleId",
                 table: "Users",
                 newName: "IX_Users_RoleId");
+
+            migrationBuilder.AlterColumn<string>(
+                name: "Username",
+                table: "Users",
+                type: "nvarchar(max)",
+                nullable: true,
+                oldClrType: typeof(string),
+                oldType: "nvarchar(256)",
+                oldMaxLength: 256,
+                oldNullable: true);
 
             migrationBuilder.AlterColumn<string>(
                 name: "Name",

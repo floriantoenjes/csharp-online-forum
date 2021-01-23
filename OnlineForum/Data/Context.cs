@@ -52,6 +52,11 @@ namespace OnlineForum.Data
                 .WithOne(us => us.User)
                 .HasForeignKey<UserSettings>("UserId");
 
+            modelBuilder.Entity<User>()
+                .HasOne<Role>(u => u.UserRole)
+                .WithMany(r => r.Users)
+                .OnDelete(DeleteBehavior.NoAction);
+
             modelBuilder.Seed();
         }
     }

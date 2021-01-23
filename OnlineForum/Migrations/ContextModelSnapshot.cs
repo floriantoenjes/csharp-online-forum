@@ -238,7 +238,7 @@ namespace OnlineForum.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "9479b973-2e00-45fe-b945-100157de3e7a",
+                            ConcurrencyStamp = "63a563e1-3346-4355-a35d-c35969061c31",
                             Name = "Admin"
                         });
                 });
@@ -350,9 +350,6 @@ namespace OnlineForum.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
-                    b.Property<string>("Username")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
@@ -372,10 +369,10 @@ namespace OnlineForum.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6d4e144f-4782-492c-9f18-80cc85b526c7",
+                            ConcurrencyStamp = "00472b67-7067-4ce8-95e8-3cbc1eaeb521",
                             EmailConfirmed = false,
-                            JoinedAt = new DateTime(2021, 1, 23, 18, 27, 4, 51, DateTimeKind.Local).AddTicks(9205),
-                            LastSeen = new DateTime(2021, 1, 23, 18, 27, 4, 50, DateTimeKind.Local).AddTicks(2385),
+                            JoinedAt = new DateTime(2021, 1, 23, 18, 40, 40, 951, DateTimeKind.Local).AddTicks(2887),
+                            LastSeen = new DateTime(2021, 1, 23, 18, 40, 40, 949, DateTimeKind.Local).AddTicks(5319),
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
                             PostCount = 0,
@@ -383,7 +380,7 @@ namespace OnlineForum.Migrations
                             RoleId = 1,
                             Signature = "Cool Signature",
                             TwoFactorEnabled = false,
-                            Username = "Florian"
+                            UserName = "Florian"
                         });
                 });
 
@@ -547,7 +544,7 @@ namespace OnlineForum.Migrations
                     b.HasOne("OnlineForum.Models.Role", "UserRole")
                         .WithMany("Users")
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("UserRole");

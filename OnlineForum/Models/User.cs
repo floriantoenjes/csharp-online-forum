@@ -8,8 +8,6 @@ namespace OnlineForum.Models
 {
     public class User : IdentityUser<int>
     {
-        public string Username { get; set; }
-
         public string Signature { get; set; }
 
         public ICollection<Thread> Threads { get; set; } = new List<Thread>();

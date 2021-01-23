@@ -16,7 +16,7 @@
                     <p>@Html.ActionLink((string) thread.Name, "Thread", "Thread", new {threadId = thread.Id})</p>
                 </div>
                 <aside class="col-3">
-                    <p>by @thread.Creator.Username</p>
+                    <p>by @thread.Creator.UserName</p>
                     <p>at @thread.CreatedAt</p>
                 </aside>
             </article>

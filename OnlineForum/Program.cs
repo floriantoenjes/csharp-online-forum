@@ -35,7 +35,7 @@ namespace OnlineForum
             context.Roles.Add(adminRole);
             
             var florian = new User();
-            florian.Username = "Florian";
+            florian.UserName = "Florian";
             florian.Signature = "Cool Signature";
             florian.PostCount = 0;
             florian.Reputation = 0;
