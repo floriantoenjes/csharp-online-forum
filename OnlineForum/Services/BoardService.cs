@@ -11,9 +11,12 @@ namespace OnlineForum.Services
     {
         private readonly IBaseRepository<Board> _boardRepository;
 
-        public BoardService(IBaseRepository<Board> boardRepository)
+        private readonly ThreadService _threadService;
+
+        public BoardService(IBaseRepository<Board> boardRepository, ThreadService threadService)
         {
             _boardRepository = boardRepository;
+            _threadService = threadService;
         }
 
         public IList<Board> GetAllBoards()
@@ -43,18 +46,16 @@ namespace OnlineForum.Services
 
         public void CreateThread(int boardId, Thread thread, Post post)
         {
-            post.CreatorId = 1;
-            post.CreatedAt = DateTime.Now;
-            
             thread.CreatorId = 1; // TODO: Replace with actual user
             thread.CreatedAt = DateTime.Now;
-            thread.Posts.Add(post);
 
             var board = GetBoard(boardId);
             board.Threads.Add(thread);
             board.LastThread = thread;
             board.ThreadCount = GetThreadCount();
             UpdateBoard(board);
+            
+            _threadService.CreatePost(thread.Id, post);
         }
     }
 }
