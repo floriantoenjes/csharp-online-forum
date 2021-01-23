@@ -22,8 +22,8 @@
                         <aside class="col-3">
                             @if (board.LastThread != null)
                             {
-                                @Html.ActionLink((string) board.LastThread.Name, "Thread", "Thread", new {threadId = board.LastThread.Id})
-                                <p class="mb-0">by @board.LastThread.Creator.UserName</p>
+                                <p>@Html.ActionLink((string) board.LastThread.Name, "Thread", "Thread", new {threadId = board.LastThread.Id})</p>
+                                <p>by @Html.ActionLink( (string) board.LastThread.Creator.UserName, "UserDetails", "User", new {userId = board.LastThread.Creator.Id})</p>
                                 <p class="mb-0">@board.LastThread.CreatedAt</p>
                             }
                         </aside>

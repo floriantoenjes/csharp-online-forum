@@ -37,10 +37,12 @@ namespace OnlineForum
             services.AddScoped<IBaseRepository<Board>, BoardRepository>();
             services.AddScoped<IBaseRepository<Thread>, ThreadRepository>();
             services.AddScoped<IBaseRepository<User>, UserRepository>();
+            services.AddScoped<IBaseRepository<PrivateMessage>, PrivateMessageRepository>();
 
             services.AddScoped<BoardService>();
             services.AddScoped<ThreadService>();
             services.AddScoped<UserService>();
+            services.AddScoped<PrivateMessageService>();
 
             services.AddIdentity<User, Role>()
                 .AddEntityFrameworkStores<Context>()
