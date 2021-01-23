@@ -39,14 +39,7 @@ namespace OnlineForum
                 {
                     var context = services.GetRequiredService<Context>();
 
-                    var dbAlreadyCreated = context.Database.CanConnect();
-                    
                     context.Database.EnsureCreated();
-                    
-                    if (!dbAlreadyCreated)
-                    {
-                        SeedDatabase(context);
-                    }
                 }
                 catch (Exception ex)
                 {

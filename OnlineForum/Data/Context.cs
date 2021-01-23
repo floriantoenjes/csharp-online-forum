@@ -46,6 +46,8 @@ namespace OnlineForum.Data
                 .HasOne<Board>(t => t.LastThreadOn)
                 .WithOne(b => b.LastThread)
                 .HasForeignKey<Board>("LastThreadId");
+            
+            modelBuilder.Seed();
         }
     }
 }
