@@ -8,8 +8,6 @@ namespace OnlineForum.Models
 {
     public class User : IdentityUser<int>
     {
-        public int Id { get; set; }
-
         public string Username { get; set; }
 
         public string Signature { get; set; }
