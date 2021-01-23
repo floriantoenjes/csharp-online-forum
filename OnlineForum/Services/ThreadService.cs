@@ -66,9 +66,9 @@ namespace OnlineForum.Services
             }
         }
 
-        public void SubscribeToThread(int threadId)
+        public void SubscribeToThread(int threadId, int currentUserId)
         {
-            var user = _userRepository.Get(1);
+            var user = _userRepository.Get(currentUserId);
             
             var thread = GetThread(threadId);
             thread.Subscribers.Add(user.Settings);

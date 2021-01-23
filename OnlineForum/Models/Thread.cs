@@ -27,8 +27,8 @@ namespace OnlineForum.Models
 
         public DateTime CreatedAt { get; set; }
 
-        public ICollection<UserSettings> Subscribers { get; set; }
-        
+        public ICollection<UserSettings> Subscribers { get; set; } = new List<UserSettings>();
+
         public int PostCount { get; set; }
     }
 }
