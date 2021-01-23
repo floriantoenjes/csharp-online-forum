@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -40,6 +41,10 @@ namespace OnlineForum
             services.AddScoped<BoardService>();
             services.AddScoped<ThreadService>();
             services.AddScoped<UserService>();
+
+            services.AddIdentity<User, Role>()
+                .AddEntityFrameworkStores<Context>()
+                .AddDefaultUI();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,6 +65,8 @@ namespace OnlineForum
 
             app.UseRouting();
 
+            app.UseAuthentication();
+            
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -67,6 +74,9 @@ namespace OnlineForum
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapRazorPages();
+                
             });
         }
     }
