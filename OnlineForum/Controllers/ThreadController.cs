@@ -29,7 +29,7 @@ namespace OnlineForum.Controllers
         {
             if (ModelState.IsValid)
             {
-                _threadService.CreatePost(threadId, post);
+                _threadService.CreatePost(threadId, post, this.CurrentUserId());
             }
 
             return RedirectToAction("Thread", new {threadId});

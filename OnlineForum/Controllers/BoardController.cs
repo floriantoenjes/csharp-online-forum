@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using System;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OnlineForum.Models;
@@ -49,11 +50,9 @@ namespace OnlineForum.Controllers
         [Authorize]
         public IActionResult CreateThread(int boardId, BoardDetailViewModel boardDetailViewModel)
         {
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier);
-            
             if (ModelState.IsValid)
             {
-                _boardService.CreateThread(boardId, boardDetailViewModel.Thread, boardDetailViewModel.Post, userId);
+                _boardService.CreateThread(boardId, boardDetailViewModel.Thread, boardDetailViewModel.Post, this.CurrentUserId());
                 return RedirectToAction("Thread", "Thread", new { threadId = boardDetailViewModel.Thread.Id });
             }
 

@@ -41,15 +41,15 @@ namespace OnlineForum.Services
             _threadRepository.Update(thread);
         }
 
-        public void CreatePost(int threadId, Post post, bool withTransaction = true)
+        public void CreatePost(int threadId, Post post, int userId, bool withTransaction = true)
         {
             IDbContextTransaction transaction = null;
             if (withTransaction)
             {
                 transaction = _threadRepository.StartTransaction();
             }
-            
-            post.CreatorId = 1; // TODO: Replace with actual user
+
+            post.CreatorId = userId;
             post.CreatedAt = DateTime.Now;
 
             var user = _userRepository.Get(1);

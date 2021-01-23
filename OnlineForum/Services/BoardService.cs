@@ -43,11 +43,11 @@ namespace OnlineForum.Services
             return _boardRepository.Count();
         }
 
-        public void CreateThread(int boardId, Thread thread, Post post, Claim userId)
+        public void CreateThread(int boardId, Thread thread, Post post, int userId)
         {
             var transaction = _boardRepository.StartTransaction();
 
-            thread.CreatorId = 1; // TODO: Replace with actual user
+            thread.CreatorId = userId;
             thread.CreatedAt = DateTime.Now;
 
             var board = GetBoard(boardId);
@@ -56,7 +56,7 @@ namespace OnlineForum.Services
             board.ThreadCount = GetThreadCount();
             UpdateBoard(board);
             
-            _threadService.CreatePost(thread.Id, post, false);
+            _threadService.CreatePost(thread.Id, post, userId, false);
 
             transaction.Commit();
         }
