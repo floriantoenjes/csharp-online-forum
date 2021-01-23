@@ -23,7 +23,7 @@ namespace OnlineForum.Controllers
         }
         
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public IActionResult CreateBoard(Board board)
         {
             if (ModelState.IsValid)
