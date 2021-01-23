@@ -9,6 +9,6 @@ namespace OnlineForum.Models
 {
     public class Role : IdentityRole<int>
     {
-        public ICollection<User> Users { get; set; }
+        
     }
 }

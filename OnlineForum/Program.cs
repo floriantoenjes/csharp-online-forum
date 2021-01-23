@@ -28,24 +28,5 @@ namespace OnlineForum
                     webBuilder.UseStartup<Startup>();
                 });
 
-        private static void SeedDatabase(Context context)
-        {
-            var adminRole = new Role();
-            adminRole.Name = "Admin";
-            context.Roles.Add(adminRole);
-            
-            var florian = new User();
-            florian.UserName = "Florian";
-            florian.Signature = "Cool Signature";
-            florian.PostCount = 0;
-            florian.Reputation = 0;
-            florian.LastSeen = DateTime.Now;
-            florian.JoinedAt = DateTime.Now;
-            florian.UserRole = adminRole;
-            context.Users.Add(florian);
-
-            context.SaveChanges();
-
-        }
     }
 }

@@ -44,7 +44,9 @@ namespace OnlineForum
 
             services.AddIdentity<User, Role>()
                 .AddEntityFrameworkStores<Context>()
-                .AddDefaultUI();
+                .AddDefaultUI()
+                .AddDefaultTokenProviders();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

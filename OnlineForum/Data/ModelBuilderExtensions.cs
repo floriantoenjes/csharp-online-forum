@@ -17,7 +17,7 @@ namespace OnlineForum.Data
             modelBuilder.Entity<User>()
                 .HasData(new User
                 {
-                    Id = 1, RoleId = 1, UserName = "Florian", Signature = "Cool Signature", PostCount = 0,
+                    Id = 1, UserName = "Florian", Signature = "Cool Signature", PostCount = 0,
                     LastSeen = DateTime.Now, JoinedAt = DateTime.Now
                 });
 

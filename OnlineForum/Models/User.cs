@@ -22,10 +22,6 @@ namespace OnlineForum.Models
 
         public ICollection<PrivateMessage> MessagesReceived { get; set; } = new List<PrivateMessage>();
 
-        public int RoleId { get; set; }
-
-        public Role UserRole { get; set; }
-
         public UserSettings Settings { get; set; }
 
         public DateTime LastSeen { get; set; }
