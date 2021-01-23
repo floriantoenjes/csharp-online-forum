@@ -23,7 +23,7 @@
                             @if (board.LastThread != null)
                             {
                                 @Html.ActionLink((string) board.LastThread.Name, "Thread", "Thread", new {threadId = board.LastThread.Id})
-                                <p class="mb-0">by @board.LastThread.Creator.Username</p>
+                                <p class="mb-0">by @board.LastThread.Creator.UserName</p>
                                 <p class="mb-0">@board.LastThread.CreatedAt</p>
                             }
                         </aside>
