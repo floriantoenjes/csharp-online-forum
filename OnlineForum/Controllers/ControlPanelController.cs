@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OnlineForum.Services;
 
 namespace OnlineForum.Controllers
 {
+    [Authorize]
     public class ControlPanelController : Controller
     {
         private readonly UserService _userService;

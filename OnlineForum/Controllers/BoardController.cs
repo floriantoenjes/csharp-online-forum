@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OnlineForum.Models;
 using OnlineForum.Services;
 using OnlineForum.ViewModels;
@@ -22,6 +23,7 @@ namespace OnlineForum.Controllers
         }
         
         [HttpPost]
+        [Authorize]
         public IActionResult CreateBoard(Board board)
         {
             if (ModelState.IsValid)
@@ -43,6 +45,7 @@ namespace OnlineForum.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult CreateThread(int boardId, BoardDetailViewModel boardDetailViewModel)
         {
             if (ModelState.IsValid)

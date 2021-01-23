@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OnlineForum.Models;
 using OnlineForum.Services;
@@ -23,6 +24,7 @@ namespace OnlineForum.Controllers
         }
         
         [HttpPost]
+        [Authorize]
         public IActionResult Thread(int threadId, Post post)
         {
             if (ModelState.IsValid)
@@ -35,6 +37,7 @@ namespace OnlineForum.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult SubscribeToThread(int threadId)
         {
             _threadService.SubscribeToThread(threadId);
