@@ -33,5 +33,13 @@ namespace OnlineForum.Controllers
             return RedirectToAction("Thread", new {threadId});
             
         }
+
+        [HttpPost]
+        public IActionResult SubscribeToThread(int threadId)
+        {
+            _threadService.SubscribeToThread(threadId);
+
+            return RedirectToAction("Thread", new {threadId});
+        }
     }
 }

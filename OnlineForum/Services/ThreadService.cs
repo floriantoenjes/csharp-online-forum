@@ -60,5 +60,15 @@ namespace OnlineForum.Services
 
             transaction.Commit();
         }
+
+        public void SubscribeToThread(int threadId)
+        {
+            var user = _userRepository.Get(1);
+            
+            var thread = GetThread(threadId);
+            thread.Subscribers.Add(user.Settings);
+            
+            _threadRepository.Update(thread);
+        }
     }
 }
