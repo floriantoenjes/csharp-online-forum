@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using OnlineForum.Models;
 
 namespace OnlineForum.Data
 {
-    public class Context : DbContext
+    public class Context : IdentityDbContext<User, Role, int>
     {
         public Context(DbContextOptions<Context> options) : base(options) { }
 
@@ -27,6 +29,8 @@ namespace OnlineForum.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<PrivateMessage>()
                 .HasOne<User>(pm => pm.Sender)
                 .WithMany(u => u.MessagesSent)
@@ -46,7 +50,12 @@ namespace OnlineForum.Data
                 .HasOne<Board>(t => t.LastThreadOn)
                 .WithOne(b => b.LastThread)
                 .HasForeignKey<Board>("LastThreadId");
-            
+
+            modelBuilder.Entity<User>()
+                .HasOne<UserSettings>(u => u.Settings)
+                .WithOne(us => us.User)
+                .HasForeignKey<UserSettings>("UserId");
+
             modelBuilder.Seed();
         }
     }
