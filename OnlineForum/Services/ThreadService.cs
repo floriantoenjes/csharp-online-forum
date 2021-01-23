@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.EntityFrameworkCore.Storage;
 using OnlineForum.Data;
 using OnlineForum.Models;
 
@@ -40,10 +41,14 @@ namespace OnlineForum.Services
             _threadRepository.Update(thread);
         }
 
-        public void CreatePost(int threadId, Post post)
+        public void CreatePost(int threadId, Post post, bool withTransaction = true)
         {
-            var transaction = _threadRepository.StartTransaction();
-
+            IDbContextTransaction transaction = null;
+            if (withTransaction)
+            {
+                transaction = _threadRepository.StartTransaction();
+            }
+            
             post.CreatorId = 1; // TODO: Replace with actual user
             post.CreatedAt = DateTime.Now;
 
@@ -55,7 +60,10 @@ namespace OnlineForum.Services
             thread.Posts.Add(post);
             UpdateThread(thread);
 
-            transaction.Commit();
+            if (withTransaction)
+            {
+                transaction?.Commit();
+            }
         }
 
         public void SubscribeToThread(int threadId)

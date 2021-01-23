@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Claims;
 using OnlineForum.Data;
 using OnlineForum.Models;
 
@@ -42,7 +43,7 @@ namespace OnlineForum.Services
             return _boardRepository.Count();
         }
 
-        public void CreateThread(int boardId, Thread thread, Post post)
+        public void CreateThread(int boardId, Thread thread, Post post, Claim userId)
         {
             var transaction = _boardRepository.StartTransaction();
 
@@ -55,7 +56,7 @@ namespace OnlineForum.Services
             board.ThreadCount = GetThreadCount();
             UpdateBoard(board);
             
-            _threadService.CreatePost(thread.Id, post);
+            _threadService.CreatePost(thread.Id, post, false);
 
             transaction.Commit();
         }
