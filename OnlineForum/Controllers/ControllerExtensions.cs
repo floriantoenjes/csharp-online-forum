@@ -9,6 +9,10 @@ namespace OnlineForum.Controllers
         public static int CurrentUserId(this Controller controller)
         {
             var userIdStr = controller.User.FindFirst(ClaimTypes.NameIdentifier);
+            if (userIdStr == null)
+            {
+                return 0;
+            }
             return Convert.ToInt32(userIdStr.Value);
         }
             
