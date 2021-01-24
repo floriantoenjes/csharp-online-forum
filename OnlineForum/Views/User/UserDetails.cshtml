@@ -1,4 +1,5 @@
-﻿
+﻿@model OnlineForum.Models.PrivateMessage
+
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -9,4 +10,15 @@
         <h1 class="display-4 mb-4">@ViewBag.User.UserName</h1>
         <h4>@ViewBag.User.UserName's signature: @ViewBag.User.Signature</h4>
     </div>
+
+    @using(@Html.BeginForm("SendPrivateMessage", "User", new {recipientId = ViewBag.User.Id}))
+    {
+        @Html.LabelFor(pm => pm.Subject, new {@class = "control-label"})
+        @Html.TextBoxFor(pm => pm.Subject, new {@class = "form-control"})
+        
+        @Html.LabelFor(pm => pm.Body, new {@class = "control-label"})
+        @Html.TextAreaFor(pm => pm.Body, new {@class = "form-control", @rows = 5})
+        
+        <button class="btn btn-primary" type="submit">Send Private Message</button>
+    }
 </div>

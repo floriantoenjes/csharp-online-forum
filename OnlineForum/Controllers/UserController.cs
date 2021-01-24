@@ -34,9 +34,11 @@ namespace OnlineForum.Controllers
         
         [HttpPost]
         [Authorize]
-        public void SendPrivateMessage(int recipientId, PrivateMessage privateMessage)
+        public IActionResult SendPrivateMessage(int recipientId, PrivateMessage privateMessage)
         {
-            _privateMessageService.sendPrivateMessage(recipientId, privateMessage);
+            _privateMessageService.SendPrivateMessage(this.CurrentUserId(), recipientId, privateMessage);
+
+            return RedirectToAction("UserDetails", new {userId = recipientId});
         }
     }
 }
