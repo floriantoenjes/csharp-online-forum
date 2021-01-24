@@ -11,6 +11,8 @@ namespace OnlineForum.Models
         public string Signature { get; set; }
 
         public ICollection<Thread> Threads { get; set; } = new List<Thread>();
+        
+        public ICollection<Thread> Subscriptions { get; set; } = new List<Thread>();
 
         public ICollection<Post> Posts { get; set; } = new List<Post>();
 
@@ -21,8 +23,6 @@ namespace OnlineForum.Models
         public ICollection<PrivateMessage> MessagesSent { get; set; } = new List<PrivateMessage>();
 
         public ICollection<PrivateMessage> MessagesReceived { get; set; } = new List<PrivateMessage>();
-
-        public UserSettings Settings { get; set; }
 
         public DateTime LastSeen { get; set; }
 

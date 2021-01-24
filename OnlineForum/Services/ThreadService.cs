@@ -71,7 +71,7 @@ namespace OnlineForum.Services
             var user = _userRepository.Get(currentUserId);
             
             var thread = GetThread(threadId);
-            thread.Subscribers.Add(user.Settings);
+            thread.Subscribers.Add(user);
             
             _threadRepository.Update(thread);
         }

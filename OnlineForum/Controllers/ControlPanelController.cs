@@ -17,7 +17,7 @@ namespace OnlineForum.Controllers
 
         public IActionResult ControlPanel()
         {
-            ViewBag.User = _userService.GetUser(1);
+            ViewBag.User = _userService.GetUser(this.CurrentUserId());
 
             return View();
         }

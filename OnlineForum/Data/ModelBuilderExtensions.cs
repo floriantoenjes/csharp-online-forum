@@ -21,12 +21,6 @@ namespace OnlineForum.Data
                     LastSeen = DateTime.Now, JoinedAt = DateTime.Now
                 });
 
-            modelBuilder.Entity<UserSettings>()
-                .HasData(new UserSettings
-                {
-                    Id = 1, UserId = 1
-                });
-            
         }
     }
 }

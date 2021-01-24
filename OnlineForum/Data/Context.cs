@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using OnlineForum.Models;
 
@@ -20,8 +15,6 @@ namespace OnlineForum.Data
         public DbSet<Post> Posts { get; set; }
 
         public DbSet<PrivateMessage> PrivateMessages { get; set; }
-
-        public DbSet<UserSettings> UserSettings { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -46,11 +39,6 @@ namespace OnlineForum.Data
                 .HasOne<Board>(t => t.LastThreadOn)
                 .WithOne(b => b.LastThread)
                 .HasForeignKey<Board>("LastThreadId");
-
-            modelBuilder.Entity<User>()
-                .HasOne<UserSettings>(u => u.Settings)
-                .WithOne(us => us.User)
-                .HasForeignKey<UserSettings>("UserId");
 
             modelBuilder.Seed();
         }

@@ -14,8 +14,7 @@ namespace OnlineForum.Data
         public override User Get(int id)
         {
             return Context.Users
-                .Include(u => u.Settings)
-                .ThenInclude(us => us.Subscriptions)
+                .Include(u => u.Subscriptions)
                 .SingleOrDefault(user => user.Id == id);
         }
 
