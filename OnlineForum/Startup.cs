@@ -13,6 +13,7 @@ using Microsoft.Extensions.Hosting;
 using OnlineForum.Data;
 using OnlineForum.Models;
 using OnlineForum.Services;
+using OnlineForum.SignalR;
 
 namespace OnlineForum
 {
@@ -48,6 +49,8 @@ namespace OnlineForum
                 .AddEntityFrameworkStores<Context>()
                 .AddDefaultUI()
                 .AddDefaultTokenProviders();
+
+            services.AddSignalR();
             
         }
 
@@ -80,7 +83,9 @@ namespace OnlineForum
                     pattern: "{controller=Home}/{action=Index}/{id?}");
 
                 endpoints.MapRazorPages();
-                
+
+                endpoints.MapHub<NotificationHub>("/chathub");
+
             });
         }
     }

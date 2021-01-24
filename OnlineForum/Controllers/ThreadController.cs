@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using OnlineForum.Models;
 using OnlineForum.Services;
+using OnlineForum.SignalR;
 
 namespace OnlineForum.Controllers
 {
@@ -11,10 +13,13 @@ namespace OnlineForum.Controllers
 
         private readonly UserService _userService;
 
-        public ThreadController(ThreadService threadService, UserService userService)
+        private readonly IHubContext<NotificationHub> _hubContext;
+
+        public ThreadController(ThreadService threadService, UserService userService, IHubContext<NotificationHub> hubContext)
         {
             _threadService = threadService;
             _userService = userService;
+            _hubContext = hubContext;
         }
         
         public IActionResult Thread(int threadId)
@@ -34,6 +39,7 @@ namespace OnlineForum.Controllers
             if (ModelState.IsValid)
             {
                 _threadService.CreatePost(threadId, post, this.CurrentUserId());
+                _hubContext.Clients.All.SendAsync("ReceiveMessage", "Ja man!");
             }
 
             return RedirectToAction("Thread", new {threadId});
