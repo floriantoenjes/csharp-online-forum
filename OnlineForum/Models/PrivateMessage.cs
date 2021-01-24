@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace OnlineForum.Models
 {
-    public class PrivateMessage
+    public class PrivateMessage : IHasCreatedAt
     {
         public int Id { get; set; }
 
@@ -22,5 +23,13 @@ namespace OnlineForum.Models
         public string Body { get; set; }
 
         public DateTime SentAt { get; set; }
+
+        [NotMapped]
+        public DateTime CreatedAt
+        {
+            get => SentAt;
+
+            set => SentAt = value;
+        }
     }
 }

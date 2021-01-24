@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OnlineForum.Models
 {
-    public class Post
+    public class Post : IHasCreatedAt
     {
         public int Id { get; set; }
 

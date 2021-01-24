@@ -50,7 +50,6 @@ namespace OnlineForum.Services
             }
 
             post.CreatorId = userId;
-            post.CreatedAt = DateTime.Now;
 
             var user = _userRepository.Get(userId);
             user.PostCount += 1;

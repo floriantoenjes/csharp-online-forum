@@ -1,12 +1,19 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using System;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using OnlineForum.Models;
 
 namespace OnlineForum.Data
 {
-    public class Context : IdentityDbContext<User, Role, int>
+    public sealed class Context : IdentityDbContext<User, Role, int>
     {
-        public Context(DbContextOptions<Context> options) : base(options) { }
+        public Context(DbContextOptions<Context> options) : base(options)
+        {
+            ChangeTracker.StateChanged += SetCreatedAt;
+            ChangeTracker.Tracked += SetCreatedAt;
+            
+        }
 
         public DbSet<Board> Boards { get; set; }
 
@@ -41,6 +48,19 @@ namespace OnlineForum.Data
                 .HasForeignKey<Board>("LastThreadId");
 
             modelBuilder.Seed();
+        }
+
+        private static void SetCreatedAt(object sender, EntityEntryEventArgs e)
+        {
+            if (e.Entry.Entity is IHasCreatedAt entityWithCreatedAt)
+            {
+                switch (e.Entry.State)
+                {
+                    case EntityState.Added:
+                        entityWithCreatedAt.CreatedAt = DateTime.Now;
+                        break;
+                }
+            }
         }
     }
 }

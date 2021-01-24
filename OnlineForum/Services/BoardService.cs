@@ -48,7 +48,6 @@ namespace OnlineForum.Services
             var transaction = _boardRepository.StartTransaction();
 
             thread.CreatorId = userId;
-            thread.CreatedAt = DateTime.Now;
 
             var board = GetBoard(boardId);
             board.Threads.Add(thread);
