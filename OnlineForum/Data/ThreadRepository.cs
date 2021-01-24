@@ -17,7 +17,8 @@ namespace OnlineForum.Data
                 .Include(thread => thread.Board)
                 .Include(thread => thread.Posts)
                 .ThenInclude(post => post.Creator)
-                .Include(thread => thread.Creator).SingleOrDefault();
+                .Include(thread => thread.Creator)
+                .Include(thread => thread.Subscribers).SingleOrDefault();
         }
 
         public override IList<Thread> GetList()
