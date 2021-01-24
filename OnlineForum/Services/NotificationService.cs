@@ -18,6 +18,15 @@ namespace OnlineForum.Services
         {
             return _notificationRepository.GetNotificationsByUserId(userId);
         }
+
+        public void CreateNotification(int receiverId, NotificationType notificationType, int typeId)
+        {
+            var newNotification = new Notification
+                {ReceiverId = receiverId, NotificationType = notificationType, TypeIdentifier = typeId};
+
+            _notificationRepository.Add(newNotification);
+            
+        }
     }
     
 }
