@@ -52,7 +52,7 @@ namespace OnlineForum.Services
             post.CreatorId = userId;
             post.CreatedAt = DateTime.Now;
 
-            var user = _userRepository.Get(1);
+            var user = _userRepository.Get(userId);
             user.PostCount += 1;
             _userRepository.Update(user);
 
