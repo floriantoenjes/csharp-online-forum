@@ -1,13 +1,14 @@
-﻿using OnlineForum.Data;
+﻿using System.Collections.Generic;
+using OnlineForum.Data;
 using OnlineForum.Models;
 
 namespace OnlineForum.Services
 {
     public class PrivateMessageService
     {
-        private readonly IBaseRepository<PrivateMessage> _privateMessageRepository;
+        private readonly IPrivateMessageRepository _privateMessageRepository;
 
-        public PrivateMessageService(IBaseRepository<PrivateMessage> privateMessageRepository)
+        public PrivateMessageService(IPrivateMessageRepository privateMessageRepository)
         {
             _privateMessageRepository = privateMessageRepository;
         }
@@ -22,6 +23,11 @@ namespace OnlineForum.Services
             privateMessage.SenderId = senderId;
             privateMessage.RecipientId = recipientId;
             _privateMessageRepository.Add(privateMessage);
+        }
+
+        public IList<PrivateMessage> GetPrivateMessagesByUserId(int currentUserId)
+        {
+            return _privateMessageRepository.GetPrivateMessagesByUserId(currentUserId);
         }
     }
 }

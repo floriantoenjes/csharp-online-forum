@@ -26,6 +26,15 @@
         }
     </div>
 
+    <div class="mx-auto">
+        @foreach (var privateMessage in ViewBag.PrivateMessages)
+        {
+            <div class="row">
+                <p>@privateMessage.Subject</p>
+            </div>
+        }
+    </div>
+
 </div>
 
 <script>

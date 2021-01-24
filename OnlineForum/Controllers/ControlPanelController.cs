@@ -11,8 +11,11 @@ namespace OnlineForum.Controllers
 
         private readonly UserService _userService;
 
-        public ControlPanelController(ThreadService threadService, UserService userService)
+        private readonly PrivateMessageService _privateMessageService;
+
+        public ControlPanelController(ThreadService threadService, UserService userService, PrivateMessageService privateMessageService)
         {
+            _privateMessageService = privateMessageService;
             _threadService = threadService;
             _userService = userService;
         }
@@ -21,6 +24,7 @@ namespace OnlineForum.Controllers
         public IActionResult ControlPanel()
         {
             ViewBag.User = _userService.GetUser(this.CurrentUserId());
+            ViewBag.PrivateMessages = _privateMessageService.GetPrivateMessagesByUserId(this.CurrentUserId());
 
             return View();
         }

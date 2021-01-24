@@ -4,7 +4,7 @@ using OnlineForum.Models;
 
 namespace OnlineForum.Data
 {
-    public class PrivateMessageRepository : BaseRepository<Context, PrivateMessage>
+    public class PrivateMessageRepository : BaseRepository<Context, PrivateMessage>, IPrivateMessageRepository
     {
         public PrivateMessageRepository(Context context) : base(context)
         {
@@ -18,6 +18,12 @@ namespace OnlineForum.Data
         public override IList<PrivateMessage> GetList()
         {
             return Context.PrivateMessages.ToList();
+        }
+
+        public IList<PrivateMessage> GetPrivateMessagesByUserId(int userId)
+        {
+            return Context.PrivateMessages
+                .Where(pm => pm.SenderId == userId || pm.RecipientId == userId).ToList();
         }
     }
 }
