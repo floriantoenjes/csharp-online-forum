@@ -22,6 +22,8 @@ namespace OnlineForum.Data
         public DbSet<Post> Posts { get; set; }
 
         public DbSet<PrivateMessage> PrivateMessages { get; set; }
+        
+        public DbSet<Notification> Notifications { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

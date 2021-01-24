@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnlineForum.Data;
 
 namespace OnlineForum.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20210124210348_CreateNotifications")]
+    partial class CreateNotifications
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -169,7 +171,7 @@ namespace OnlineForum.Migrations
 
                     b.HasIndex("ReceiverId");
 
-                    b.ToTable("Notifications");
+                    b.ToTable("Notification");
                 });
 
             modelBuilder.Entity("OnlineForum.Models.Post", b =>
@@ -264,7 +266,7 @@ namespace OnlineForum.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "0532c1cb-8f62-40d7-bb83-81ccd4b2090a",
+                            ConcurrencyStamp = "b2f82e11-361a-4d33-82fa-8d5832215033",
                             Name = "Admin"
                         });
                 });
@@ -390,10 +392,10 @@ namespace OnlineForum.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ca4b9625-4a27-401c-939e-e3000635a91d",
+                            ConcurrencyStamp = "d376e797-f58d-45e2-8d41-b9f9a3a85681",
                             EmailConfirmed = false,
-                            JoinedAt = new DateTime(2021, 1, 24, 22, 20, 58, 832, DateTimeKind.Local).AddTicks(5049),
-                            LastSeen = new DateTime(2021, 1, 24, 22, 20, 58, 830, DateTimeKind.Local).AddTicks(8333),
+                            JoinedAt = new DateTime(2021, 1, 24, 22, 3, 47, 797, DateTimeKind.Local).AddTicks(7184),
+                            LastSeen = new DateTime(2021, 1, 24, 22, 3, 47, 796, DateTimeKind.Local).AddTicks(506),
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
                             PostCount = 0,

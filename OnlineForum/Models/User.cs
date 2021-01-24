@@ -27,5 +27,7 @@ namespace OnlineForum.Models
         public DateTime LastSeen { get; set; }
 
         public DateTime JoinedAt { get; set; }
+        
+        public ICollection<Notification> Notifications { get; set; } = new List<Notification>();
     }
 }
