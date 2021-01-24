@@ -43,5 +43,14 @@ namespace OnlineForum.Controllers
 
             return RedirectToAction("Thread", new {threadId});
         }
+        
+        [HttpPost]
+        [Authorize]
+        public IActionResult UnsubscribeFromThread(int threadId)
+        {
+            _threadService.UnsubscribeFromThread(threadId, this.CurrentUserId());
+            
+            return RedirectToAction("Thread", new {threadId});
+        }
     }
 }

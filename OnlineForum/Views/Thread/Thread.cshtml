@@ -49,7 +49,7 @@
 <script>
     function subscribeToThread(){
         $.post("@Url.Action("SubscribeToThread", "Thread")" + "?threadId=" + @ViewBag.Thread.Id).done(() => {
-            alert('SEX!');
+            location.reload();
         });
     }
 </script>

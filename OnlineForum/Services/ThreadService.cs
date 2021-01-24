@@ -75,5 +75,15 @@ namespace OnlineForum.Services
             
             _threadRepository.Update(thread);
         }
+
+        public void UnsubscribeFromThread(int threadId, int currentUserId)
+        {
+            var user = _userRepository.Get(currentUserId);
+
+            var thread = GetThread(threadId);
+            thread.Subscribers.Remove(user);
+            
+            _threadRepository.Update(thread);
+        }
     }
 }
