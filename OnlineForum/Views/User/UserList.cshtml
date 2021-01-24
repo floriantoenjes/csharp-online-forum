@@ -15,7 +15,7 @@
         @foreach (var user in ViewBag.Users)
         {
             <tr>
-                <td>@user.UserName</td>
+                <td>@Html.ActionLink( (string) user.UserName, "UserDetails", "User", new {userId = user.Id})</td>
                 <td>@user.PostCount</td>
             </tr>
         }
