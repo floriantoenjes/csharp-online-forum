@@ -1,6 +1,6 @@
 ﻿@model OnlineForum.ViewModels.BoardDetailViewModel
 
-<div class="container">
+<div>
     <div class="row">
         <p class="col-3">@Html.ActionLink("Board Overview", "BoardOverview", "Board")</p>
         <div class="text-center col-12">
@@ -14,6 +14,7 @@
             <article class="row border p-4 my-4">
                 <div class="col-9">
                     <p>@Html.ActionLink((string) thread.Name, "Thread", "Thread", new {threadId = thread.Id})</p>
+                    <p>Replys: @thread.Posts.Count</p>
                 </div>
                 <aside class="col-3">
                     <p>by @Html.ActionLink( (string) thread.Creator.UserName, "UserDetails", "User", new {userId = thread.Creator.Id})</p>
@@ -24,7 +25,7 @@
     </div>
 </div>
 
-<div class="container">
+<div>
     @using (Html.BeginForm("CreateThread", "Board", new {boardId = Model.Board.Id}))
     {
         <div class="row">

@@ -15,7 +15,9 @@ namespace OnlineForum.Data
         {
             return Context.Boards.Where(board => board.Id == id)
                 .Include(board => board.LastThread)
-                .Include(board => board.Threads).ThenInclude(thread => thread.Creator)
+                .Include(board => board.Threads)
+                .ThenInclude(thread => thread.Creator)
+                .ThenInclude(thread => thread.Posts)
                 .SingleOrDefault();
         }
 
