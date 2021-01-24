@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OnlineForum.Services;
 
@@ -24,7 +25,8 @@ namespace OnlineForum.Controllers
         public IActionResult ControlPanel()
         {
             ViewBag.User = _userService.GetUser(this.CurrentUserId());
-            ViewBag.PrivateMessages = _privateMessageService.GetPrivateMessagesByUserId(this.CurrentUserId());
+            ViewBag.PrivateMessages = _privateMessageService.GetPrivateMessagesByUserId(this.CurrentUserId())
+                .Where(pm => pm.RecipientId == this.CurrentUserId());
 
             return View();
         }
