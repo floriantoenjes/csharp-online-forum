@@ -5,22 +5,49 @@
 
 "use strict";
 
-var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
+function setupSignalR()
+{
+    var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
 
-//Disable send button until connection is established
+    connection.on("ReceiveMessage", function (user, message) {
 
-connection.on("ReceiveMessage", function (user, message) {
-    
-    const $notificationBell = $('#notification-bell .badge');
-    const notificationCount = +$notificationBell.html();
-    
-    $notificationBell.html(notificationCount + 1);
-    $notificationBell.css("visibility", "");
-    
-});
+        const $notificationBell = $('#notification-bell .badge');
+        const notificationCount = +$notificationBell.html();
 
-connection.start().then(function () {
-    console.log('Connected!')
-}).catch(function (err) {
-    return console.error(err.toString());
-});
+        $notificationBell.html(notificationCount + 1);
+        $notificationBell.css("visibility", "");
+
+    });
+
+    connection.start().then(function () {
+        console.log('Connected!')
+    }).catch(function (err) {
+        return console.error(err.toString());
+    });
+}
+
+function setupNotificationDropdown() 
+{
+    const $notificationContainer = $('.notification-container');
+    
+    $notificationContainer.hide();
+    $('*[data-toggle="notification-container"]').click(() => {
+
+        if ($notificationContainer.is(':hidden')) {
+            
+            const $overlay = $("<div id='overlay' style='position: absolute; width: 100vw; height: 100vh; z-index: 10; left: 0; top: 0;'></div>");
+            $overlay.click(function () {
+                $(this).remove();
+                $notificationContainer.hide();
+            });
+            
+            $(document.body).append($overlay);
+        }
+        
+        $notificationContainer.toggle();
+    });
+}
+
+
+setupSignalR();
+setupNotificationDropdown();
