@@ -11,10 +11,13 @@ namespace OnlineForum.Controllers
 
         private readonly PrivateMessageService _privateMessageService;
 
-        public UserController(UserService userService, PrivateMessageService privateMessageService)
+        private readonly NotificationService _notificationService;
+
+        public UserController(UserService userService, PrivateMessageService privateMessageService, NotificationService notificationService)
         {
             _userService = userService;
             _privateMessageService = privateMessageService;
+            _notificationService = notificationService;
         }
 
         public IActionResult UserList()
@@ -38,6 +41,8 @@ namespace OnlineForum.Controllers
         {
             _privateMessageService.SendPrivateMessage(this.CurrentUserId(), recipientId, privateMessage);
 
+            _notificationService.CreateNotification(recipientId, NotificationType.PrivateMessage, privateMessage.Id);
+            
             return RedirectToAction("UserDetails", new {userId = recipientId});
         }
     }

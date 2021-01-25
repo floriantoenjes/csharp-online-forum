@@ -13,17 +13,13 @@ namespace OnlineForum.Controllers
 
         private readonly UserService _userService;
 
-        private readonly IHubContext<NotificationHub> _hubContext;
-
         private readonly NotificationService _notificationService;
 
-        public ThreadController(ThreadService threadService, UserService userService, 
-            IHubContext<NotificationHub> hubContext, NotificationService notificationService)
+        public ThreadController(ThreadService threadService, UserService userService, NotificationService notificationService)
         
         {
             _threadService = threadService;
             _userService = userService;
-            _hubContext = hubContext;
             _notificationService = notificationService;
         }
         
@@ -44,8 +40,7 @@ namespace OnlineForum.Controllers
             if (ModelState.IsValid)
             {
                 _threadService.CreatePost(threadId, post, this.CurrentUserId());
-                _hubContext.Clients.All.SendAsync("ReceiveMessage", "Ja man!");
-                _notificationService.CreateNotification(this.CurrentUserId(), NotificationType.NewPost, post.Id);
+                _notificationService.CreateNotification(this.CurrentUserId(), NotificationType.NewPost, threadId);
             }
 
             return RedirectToAction("Thread", new {threadId});

@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.SignalR;
 using OnlineForum.Data;
 using OnlineForum.Models;
+using OnlineForum.SignalR;
 
 namespace OnlineForum.Services
 {
@@ -9,9 +11,12 @@ namespace OnlineForum.Services
     {
         private readonly INotificationRepository _notificationRepository;
 
-        public NotificationService(INotificationRepository notificationRepository)
+        private readonly IHubContext<NotificationHub> _hubContext;
+
+        public NotificationService(INotificationRepository notificationRepository, IHubContext<NotificationHub> hubContext)
         {
             _notificationRepository = notificationRepository;
+            _hubContext = hubContext;
         }
 
         public IList<Notification> GetNotificationsForUser(int userId)
@@ -25,7 +30,8 @@ namespace OnlineForum.Services
                 {ReceiverId = receiverId, NotificationType = notificationType, TypeIdentifier = typeId};
 
             _notificationRepository.Add(newNotification);
-            
+
+            _hubContext.Clients.All.SendAsync("ReceiveMessage", "Ja man!");
         }
     }
     
