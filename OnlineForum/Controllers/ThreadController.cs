@@ -35,7 +35,7 @@ namespace OnlineForum.Controllers
         
         [HttpPost]
         [Authorize]
-        public IActionResult Thread(int threadId, Post post)
+        public IActionResult CreatePost(int threadId, Post post)
         {
             if (ModelState.IsValid)
             {

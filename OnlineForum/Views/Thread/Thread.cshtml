@@ -30,7 +30,7 @@
         </article>
     }
 
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("CreatePost", "Thread", new {threadId = ViewBag.Thread.Id}))
     {
         <div class="row">
             <div class="col-12 form-group">
