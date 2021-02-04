@@ -26,7 +26,7 @@ namespace OnlineForum.Controllers
         {
             ViewBag.User = _userService.GetUser(this.CurrentUserId());
             ViewBag.PrivateMessages = _privateMessageService.GetPrivateMessagesByUserId(this.CurrentUserId())
-                .Where(pm => pm.RecipientId == this.CurrentUserId());
+                .Where(pm => pm.RecipientId == this.CurrentUserId()).OrderByDescending(pm => pm.CreatedAt);
 
             return View();
         }

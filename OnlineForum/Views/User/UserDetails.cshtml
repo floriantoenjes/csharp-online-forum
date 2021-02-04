@@ -17,7 +17,7 @@
         @Html.TextBoxFor(pm => pm.Subject, new {@class = "form-control"})
         
         @Html.LabelFor(pm => pm.Body, new {@class = "control-label"})
-        @Html.TextAreaFor(pm => pm.Body, new {@class = "form-control", @rows = 5})
+        @Html.TextAreaFor(pm => pm.Body, new {@class = "form-control mb-4", @rows = 5})
         
         <button class="btn btn-primary" type="submit">Send Private Message</button>
     }

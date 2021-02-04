@@ -13,11 +13,11 @@
         {
             <article class="row border p-4 my-4">
                 <div class="col-9">
-                    <h5>@Html.ActionLink((string) thread.Name, "Thread", "Thread", new {threadId = thread.Id})</h5>
+                    <h5>@Html.ActionLink( thread.Name, "Thread", "Thread", new {threadId = thread.Id})</h5>
                     <p>Replys: @thread.Posts.Count</p>
                 </div>
                 <aside class="col-3">
-                    <p>by @Html.ActionLink( (string) thread.Creator.UserName, "UserDetails", "User", new {userId = thread.Creator.Id})</p>
+                    <p>by @Html.ActionLink(  thread.Creator.UserName, "UserDetails", "User", new {userId = thread.Creator.Id})</p>
                     <p>at @thread.CreatedAt</p>
                 </aside>
             </article>
