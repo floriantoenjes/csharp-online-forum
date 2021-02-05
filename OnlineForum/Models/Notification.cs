@@ -12,6 +12,8 @@ namespace OnlineForum.Models
         
         public DateTime CreatedAt { get; set; }
         
+        public DateTime? ReadAt { get; set; }
+        
         public NotificationType NotificationType { get; set; }
         
         public int TypeIdentifier { get; set; }
