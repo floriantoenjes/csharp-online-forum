@@ -1,6 +1,8 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using OnlineForum.Models;
 using OnlineForum.Services;
 
 namespace OnlineForum.Controllers
@@ -13,12 +15,15 @@ namespace OnlineForum.Controllers
         private readonly UserService _userService;
 
         private readonly PrivateMessageService _privateMessageService;
+        
+        private readonly NotificationService _notificationService;
 
-        public ControlPanelController(ThreadService threadService, UserService userService, PrivateMessageService privateMessageService)
+        public ControlPanelController(ThreadService threadService, UserService userService, PrivateMessageService privateMessageService, NotificationService notificationService)
         {
-            _privateMessageService = privateMessageService;
             _threadService = threadService;
             _userService = userService;
+            _privateMessageService = privateMessageService;
+            _notificationService = notificationService;
         }
 
 
@@ -38,6 +43,20 @@ namespace OnlineForum.Controllers
             _threadService.UnsubscribeFromThread(threadId, this.CurrentUserId());
 
             return RedirectToAction("ControlPanel");
+        }
+
+        public IActionResult GoToNotification(int notificationId)
+        {
+            var readNotification = _notificationService.MarkNotificationRead(notificationId);
+            switch (readNotification.NotificationType)
+            {
+                case NotificationType.NewPost:
+                    return RedirectToAction("Thread", "Thread", new {threadId = readNotification.TypeIdentifier});
+                case NotificationType.PrivateMessage:
+                    return RedirectToAction("ControlPanel", "ControlPanel");
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
     }
 }

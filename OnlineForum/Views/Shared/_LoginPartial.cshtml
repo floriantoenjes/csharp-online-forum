@@ -8,7 +8,7 @@
 
 @{
     var notifications = NotificationService.GetNotificationsForUser(Convert.ToInt32(UserManager.GetUserId(User)));
-    var notificationCount = notifications.Count;
+    var notificationCount = notifications.Count(n => n.ReadAt == null);
 }
 
 <ul class="navbar-nav">
@@ -43,11 +43,17 @@
                                 @switch (notification.NotificationType)
                                 {
                                     case NotificationType.NewPost:
-                                        @Html.ActionLink("New Post in Thread", "Thread", "Thread", new {threadId = notification.TypeIdentifier});
+                                        @Html.ActionLink("New Post in Thread", 
+                                            "GoToNotification", 
+                                            "ControlPanel", 
+                                            new {notificationId = notification.Id});
                                         break;
                                     
                                     case NotificationType.PrivateMessage:
-                                        @Html.ActionLink("New Private Message", "ControlPanel", "ControlPanel");
+                                        @Html.ActionLink("New Private Message", 
+                                            "GoToNotification", 
+                                            "ControlPanel", 
+                                            new {notificationId = notification.Id});
                                         break;
                                 }
                             </p>

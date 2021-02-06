@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.SignalR;
 using OnlineForum.Data;
 using OnlineForum.Models;
@@ -21,7 +23,7 @@ namespace OnlineForum.Services
 
         public IList<Notification> GetNotificationsForUser(int userId)
         {
-            return _notificationRepository.GetNotificationsByUserId(userId);
+            return _notificationRepository.GetNotificationsByUserId(userId).OrderByDescending(n => n.CreatedAt).ToList();
         }
 
         public void CreateNotification(int receiverId, NotificationType notificationType, int typeId)
@@ -32,6 +34,15 @@ namespace OnlineForum.Services
             _notificationRepository.Add(newNotification);
 
             _hubContext.Clients.All.SendAsync("ReceiveMessage", "Ja man!");
+        }
+
+        public Notification MarkNotificationRead(int notificationId)
+        {
+            var notification = _notificationRepository.Get(notificationId);
+            notification.ReadAt = DateTime.Now;
+            _notificationRepository.Update(notification);
+
+            return notification;
         }
     }
     

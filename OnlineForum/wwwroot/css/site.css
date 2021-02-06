@@ -78,3 +78,9 @@ body {
   top: -0.5em;
   left: -1.0em;
 }
+
+.notification-container ul {
+  width: 14em; 
+  height: 26em; 
+  overflow-y: scroll;
+}
