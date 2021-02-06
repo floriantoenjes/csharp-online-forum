@@ -40,7 +40,8 @@ namespace OnlineForum.Controllers
             if (ModelState.IsValid)
             {
                 _threadService.CreatePost(threadId, post, this.CurrentUserId());
-                _notificationService.CreateNotification(this.CurrentUserId(), NotificationType.NewPost, threadId);
+                var subscribers = _threadService.GetThread(threadId).Subscribers;
+                _notificationService.CreateNotification(subscribers, NotificationType.NewPost, threadId);
             }
 
             return RedirectToAction("Thread", new {threadId});

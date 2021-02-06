@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.Storage;
 
@@ -11,6 +12,8 @@ namespace OnlineForum.Data
         TEntity Get(int id);
 
         IList<TEntity> GetList();
+        
+        IList<TEntity> GetListByQuery(Expression<Func<TEntity,bool>> predicate);
 
         void Add(TEntity entity);
 

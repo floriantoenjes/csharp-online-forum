@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
@@ -32,6 +33,12 @@ namespace OnlineForum.Data
         public abstract TEntity Get(int id);
 
         public abstract IList<TEntity> GetList();
+
+        public IList<TEntity> GetListByQuery( Expression<Func<TEntity,bool>> predicate)
+        {
+            var set = Context.Set<TEntity>();
+            return set.Where(predicate).ToList();
+        }
 
         public void Update(TEntity entity)
         {

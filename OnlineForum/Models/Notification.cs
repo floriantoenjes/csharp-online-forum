@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace OnlineForum.Models
 {
@@ -6,9 +7,7 @@ namespace OnlineForum.Models
     {
         public int Id { get; set; }
         
-        public int ReceiverId { get; set; }
-        
-        public User Receiver { get; set; }
+        public ICollection<User> Receivers { get; set; }
         
         public DateTime CreatedAt { get; set; }
         

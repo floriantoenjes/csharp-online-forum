@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OnlineForum.Models;
 using OnlineForum.Services;
@@ -41,7 +42,10 @@ namespace OnlineForum.Controllers
         {
             _privateMessageService.SendPrivateMessage(this.CurrentUserId(), recipientId, privateMessage);
 
-            _notificationService.CreateNotification(recipientId, NotificationType.PrivateMessage, privateMessage.Id);
+            var receivers = new List<User>();
+            receivers.Add(_userService.GetUser(this.CurrentUserId()));
+            
+            _notificationService.CreateNotification(receivers, NotificationType.PrivateMessage, privateMessage.Id);
             
             return RedirectToAction("UserDetails", new {userId = recipientId});
         }

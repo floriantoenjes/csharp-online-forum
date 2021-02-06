@@ -22,7 +22,7 @@ namespace OnlineForum.Data
 
         public IList<Notification> GetNotificationsByUserId(int userId)
         {
-            return Context.Notifications.Where(n => n.ReceiverId == userId).ToList();
+            return Context.Notifications.Where(n => n.Receivers.Any(r => r.Id == userId)).ToList();
         }
     }
 }

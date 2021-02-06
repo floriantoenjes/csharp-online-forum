@@ -26,10 +26,12 @@ namespace OnlineForum.Services
             return _notificationRepository.GetNotificationsByUserId(userId).OrderByDescending(n => n.CreatedAt).ToList();
         }
 
-        public void CreateNotification(int receiverId, NotificationType notificationType, int typeId)
+        public void CreateNotification(ICollection<User> receivers, NotificationType notificationType, int typeId)
         {
             var newNotification = new Notification
-                {ReceiverId = receiverId, NotificationType = notificationType, TypeIdentifier = typeId};
+            {
+                Receivers = receivers, NotificationType = notificationType, TypeIdentifier = typeId
+            };
 
             _notificationRepository.Add(newNotification);
 
