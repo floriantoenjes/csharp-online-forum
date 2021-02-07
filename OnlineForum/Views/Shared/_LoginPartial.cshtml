@@ -51,7 +51,8 @@
                                         @Html.ActionLink("New Post in Thread",
                                             "GoToNotification",
                                             "ControlPanel",
-                                            new {notificationId = notification.Id})
+                                            new {notificationId = notification.Id},
+                                            new {@class=(string) (NotificationRead(notification) ? "read-notification" : "")})
                                         ;
                                         break;
 
@@ -59,7 +60,8 @@
                                         @Html.ActionLink("New Private Message",
                                             "GoToNotification",
                                             "ControlPanel",
-                                            new {notificationId = notification.Id})
+                                            new {notificationId = notification.Id},
+                                            new {@class=(string) (NotificationRead(notification) ? "read-notification" : "")})
                                         ;
                                         break;
                                     default:
@@ -86,6 +88,9 @@
                             <hr>
                         </li>
                     }
+                    <li>
+                        <button class="btn btn-primary col-12">Clear Notifications</button>
+                    </li>
                 </ul>
             </div>
         </li>

@@ -7,5 +7,8 @@ namespace OnlineForum.Data
     public interface INotificationRepository : IBaseRepository<Notification>
     {
         IList<Notification> GetNotificationsByUserId(int userId);
+
+        void DeleteNotificationsByUserId(int userId);
+        
     }
 }

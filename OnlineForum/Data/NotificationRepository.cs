@@ -24,5 +24,12 @@ namespace OnlineForum.Data
         {
             return Context.Notifications.Where(n => n.Receivers.Any(r => r.Id == userId)).ToList();
         }
+
+        public void DeleteNotificationsByUserId(int userId)
+        {
+            var notifications = Context.Set<Notification>().Where(n => n.Receivers.Any(r => r.Id == userId));
+            Context.Notifications.RemoveRange(notifications);
+            Context.SaveChanges();
+        }
     }
 }

@@ -84,3 +84,11 @@ body {
   max-height: 26em; 
   overflow-y: scroll;
 }
+
+.read-notification {
+  color: #000;
+}
+
+.read-notification:hover {
+  color: #0366d6;
+}

@@ -37,6 +37,11 @@ namespace OnlineForum.Services
 
             _hubContext.Clients.All.SendAsync("ReceiveMessage", "Ja man!");
         }
+        
+        public void MarkAllNotificationsRead(int userId)
+        {
+            _notificationRepository.DeleteNotificationsByUserId(userId);
+        }
 
         public Notification MarkNotificationRead(int notificationId)
         {

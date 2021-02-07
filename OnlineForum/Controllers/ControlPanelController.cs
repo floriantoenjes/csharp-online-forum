@@ -58,5 +58,11 @@ namespace OnlineForum.Controllers
                     throw new ArgumentOutOfRangeException();
             }
         }
+
+        public IActionResult MarkAllNotificationsRead()
+        {
+            _notificationService.MarkAllNotificationsRead(this.CurrentUserId());
+            return NotFound();
+        }
     }
 }
