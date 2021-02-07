@@ -88,9 +88,12 @@
                             <hr>
                         </li>
                     }
-                    <li>
-                        <button class="btn btn-primary col-12">Clear Notifications</button>
-                    </li>
+                    @if (notifications.Count > 0)
+                    {
+                        <li>
+                            <button class="btn btn-primary col-12" onclick="markNotificationsRead()">Clear Notifications</button>
+                        </li>                        
+                    }
                 </ul>
             </div>
         </li>
@@ -110,3 +113,10 @@
         </li>
     }
 </ul>
+
+<script>
+    function markNotificationsRead(){
+        $.post("@Url.Action("MarkAllNotificationsRead", "ControlPanel", new {userId=UserManager.GetUserId(User)})")
+        .done(() => location.reload());
+    }
+</script>

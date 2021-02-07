@@ -63,7 +63,7 @@ namespace OnlineForum.Controllers
         public IActionResult MarkAllNotificationsRead()
         {
             _notificationService.MarkAllNotificationsRead(this.CurrentUserId());
-            return NotFound();
+            return Ok();
         }
     }
 }
