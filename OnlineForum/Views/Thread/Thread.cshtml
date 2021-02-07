@@ -49,8 +49,8 @@
             <div class="col-12">
                 <button class="btn btn-primary mr-4" type="submit">Create Post</button>
                 
-                <button class="btn btn-success" style="display: @(!HasSubscription() ? "" : "none")" onclick="subscribeToThread()">Subscribe to Thread</button>
-                <button class="btn btn-danger" style="display: @(HasSubscription() ? "" : "none")" onclick="unsubscribeFromThread()">Unsubscribe from Thread</button>
+                <button id="subscribe-btn" class="btn btn-success" style="display: @(!HasSubscription() ? "" : "none")" onclick="subscribeToThread()" type="button">Subscribe to Thread</button>
+                <button id="unsubscribe-btn" class="btn btn-danger" style="display: @(HasSubscription() ? "" : "none")" onclick="unsubscribeFromThread()" type="button">Unsubscribe from Thread</button>
             </div>
         </div>
     }
@@ -58,13 +58,15 @@
 <script>
     function subscribeToThread(){
         $.post("@Url.Action("SubscribeToThread", "Thread")" + "?threadId=" + @ViewBag.Thread.Id).done(() => {
-            location.reload();
+            $('#subscribe-btn').hide();
+            $('#unsubscribe-btn').show();
         });
     }
     
     function unsubscribeFromThread(){
             $.post("@Url.Action("UnsubscribeFromThread", "Thread")" + "?threadId=" + @ViewBag.Thread.Id).done(() => {
-                location.reload();
+                $('#unsubscribe-btn').hide();
+                $('#subscribe-btn').show();
             });
         }
 </script>

@@ -74,9 +74,8 @@ body {
 /* Custom Styling */
 .badge {
   width: 1.5em;
-  position: relative;
-  top: -0.5em;
-  left: -1.0em;
+  position: absolute;
+  left: 1em;
 }
 
 .notification-container ul {

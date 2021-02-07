@@ -54,7 +54,8 @@ namespace OnlineForum.Controllers
         {
             _threadService.SubscribeToThread(threadId, this.CurrentUserId());
 
-            return RedirectToAction("Thread", new {threadId});
+            return Ok();
+            // return RedirectToAction("Thread", new {threadId});
         }
         
         [HttpPost]
@@ -62,8 +63,9 @@ namespace OnlineForum.Controllers
         public IActionResult UnsubscribeFromThread(int threadId)
         {
             _threadService.UnsubscribeFromThread(threadId, this.CurrentUserId());
-            
-            return RedirectToAction("Thread", new {threadId});
+
+            return Ok();
+            // return RedirectToAction("Thread", new {threadId});
         }
     }
 }
