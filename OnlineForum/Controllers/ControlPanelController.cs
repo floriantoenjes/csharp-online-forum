@@ -59,6 +59,7 @@ namespace OnlineForum.Controllers
             }
         }
 
+        [HttpPost]
         public IActionResult MarkAllNotificationsRead()
         {
             _notificationService.MarkAllNotificationsRead(this.CurrentUserId());
