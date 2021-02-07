@@ -8,7 +8,6 @@ namespace OnlineForum.SignalR
         public async Task Notify(string user, string message)
         {
             await Clients.All.SendAsync("ReceiveMessage", user, message);
-            
         }
     }
 }
