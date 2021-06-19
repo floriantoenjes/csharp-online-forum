@@ -43,7 +43,7 @@ namespace OnlineForum.Controllers
             _privateMessageService.SendPrivateMessage(this.CurrentUserId(), recipientId, privateMessage);
 
             var receivers = new List<User>();
-            receivers.Add(_userService.GetUser(this.CurrentUserId()));
+            receivers.Add(_userService.GetUser(recipientId));
             
             _notificationService.CreateNotification(receivers, NotificationType.PrivateMessage, privateMessage.Id);
             

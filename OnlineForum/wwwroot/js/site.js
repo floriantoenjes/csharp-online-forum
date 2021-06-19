@@ -7,16 +7,17 @@
 
 function setupSignalR()
 {
-    var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
+    const connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
 
     connection.on("ReceiveMessage", function (user, message) {
 
         const $notificationBell = $('#notification-bell .badge');
-        const notificationCount = +$notificationBell.html();
+        const notificationCount = +$notificationBell.html() || 0;
 
         $notificationBell.html(notificationCount + 1);
-        $notificationBell.css("visibility", "");
+        $notificationBell.removeClass('d-none');
 
+        console.log(user, message, notificationCount, $notificationBell);
     });
 
     connection.start().then(function () {
