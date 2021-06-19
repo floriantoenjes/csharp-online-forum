@@ -184,10 +184,10 @@
                 
                 case 0:
                 case 'NewPost':
-                    $('.notification-container').prepend(
+                    $('.notification-container ul').prepend(
                         $(`
                                 <li>
-                                    <p>
+                                    <p class="text-center">
                                         <a href="@Url.Action("GoToNotification", "ControlPanel")/?notificationId=${id}">New Post in Thread!</a>
                                         <span class="text-primary ml-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-fill" viewBox="0 0 16 16">
@@ -196,15 +196,16 @@
                                         </span>
                                     </p>
                                 </li>
+                                <hr>
                             `))
                     break;
                     
                 case 1:
                 case 'PrivateMessage':
-                    $('.notification-container').prepend(
+                    $('.notification-container ul').prepend(
                         $(`
                                 <li>
-                                    <p>
+                                    <p class="text-center">
                                         <a href="@Url.Action("GoToNotification", "ControlPanel")/?notificationId=${id}">New Private Message!</a>
                                         <span class="text-primary ml-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-fill" viewBox="0 0 16 16">
@@ -213,6 +214,7 @@
                                         </span>
                                     </p>
                                 </li>
+                                <hr>
                             `))
                     break;
                     
