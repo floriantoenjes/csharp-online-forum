@@ -19,15 +19,6 @@
     <ul class="navbar-nav">
         @if (SignInManager.IsSignedIn(User))
         {
-            <li class="nav-item">
-                @* <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a> *@
-                <a  class="nav-link text-dark" style="margin-top: 1px">Hello @UserManager.GetUserName(User)!</a>
-            </li>
-            <li class="nav-item mr-4">
-                <form id="logoutForm" class="form-inline" action="@Url.Action("ControlPanel", "ControlPanel", new {area = ""})">
-                    <button id="logout" type="submit" class="nav-link btn btn-link text-dark">Control Panel</button>
-                </form>
-            </li>
             <li class="nav-item mr-4 position-relative">
                 <div id="notification-bell" class="mt-1" style="cursor: pointer" data-toggle="notification-container">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
@@ -106,17 +97,13 @@
                 </form>
             </li>
         }
-        else
-        {
-            <li class="nav-item">
-                <a class="nav-link text-dark" id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
-            </li>
-        }
+        <partial name="_LoginPartial"/>
     </ul>
+    @RenderSection("UserInfoSection", required: false)
 }
+
+@RenderSection("UserInfoSection", required: false)
+
 
 @RenderBody()
 
@@ -233,4 +220,6 @@
             markNotificationsRead();
         });
     </script>
+    
+    @RenderSection("Scripts", required: false)
 }
