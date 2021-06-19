@@ -35,7 +35,7 @@ namespace OnlineForum.Services
 
             _notificationRepository.Add(newNotification);
 
-            _hubContext.Clients.All.SendAsync("ReceiveMessage", "Ja man!");
+            _hubContext.Clients.All.SendAsync("ReceiveMessage", newNotification.Id, notificationType);
         }
         
         public void MarkAllNotificationsRead(int userId)

@@ -39,58 +39,58 @@
             </div>
             <div class="bg-white border notification-container position-absolute" style="left: -10em; z-index: 15">
                 <ul class="list-unstyled p-4">
-                    @foreach (var notification in notifications)
-                    {
-                        <li>
-                            <p>
-                                @switch (notification.NotificationType)
-                                {
-                                    case NotificationType.NewPost:
-                                        @Html.ActionLink("New Post in Thread",
-                                            "GoToNotification",
-                                            "ControlPanel",
-                                            new {notificationId = notification.Id},
-                                            new {@class=(string) (NotificationRead(notification) ? "read-notification" : "")})
-                                        ;
-                                        break;
-
-                                    case NotificationType.PrivateMessage:
-                                        @Html.ActionLink("New Private Message",
-                                            "GoToNotification",
-                                            "ControlPanel",
-                                            new {notificationId = notification.Id},
-                                            new {@class=(string) (NotificationRead(notification) ? "read-notification" : "")})
-                                        ;
-                                        break;
-                                    default:
-                                        throw new ArgumentOutOfRangeException();
-                                }
-
-                                @if (!NotificationRead(notification))
-                                {
-                                    <span class="text-primary ml-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-fill" viewBox="0 0 16 16">
-                                            <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z"/>
-                                        </svg>
-                                    </span>
-                                }
-                                else
-                                {
-                                    <span class="text-secondary ml-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-open-fill" viewBox="0 0 16 16">
-                                            <path d="M8.941.435a2 2 0 0 0-1.882 0l-6 3.2A2 2 0 0 0 0 5.4v.313l6.709 3.933L8 8.928l1.291.717L16 5.715V5.4a2 2 0 0 0-1.059-1.765l-6-3.2zM16 6.873l-5.693 3.337L16 13.372v-6.5zm-.059 7.611L8 10.072.059 14.484A2 2 0 0 0 2 16h12a2 2 0 0 0 1.941-1.516zM0 13.373l5.693-3.163L0 6.873v6.5z"/>
-                                        </svg>
-                                    </span>
-                                }
-                            </p>
-                            <hr>
-                        </li>
-                    }
+                    @* @foreach (var notification in notifications) *@
+                    @* { *@
+                    @*     <li> *@
+                    @*         <p> *@
+                    @*             @switch (notification.NotificationType) *@
+                    @*             { *@
+                    @*                 case NotificationType.NewPost: *@
+                    @*                     @Html.ActionLink("New Post in Thread", *@
+                    @*                         "GoToNotification", *@
+                    @*                         "ControlPanel", *@
+                    @*                         new {notificationId = notification.Id}, *@
+                    @*                         new {@class=(string) (NotificationRead(notification) ? "read-notification" : "")}) *@
+                    @*                     ; *@
+                    @*                     break; *@
+                    @* *@
+                    @*                 case NotificationType.PrivateMessage: *@
+                    @*                     @Html.ActionLink("New Private Message", *@
+                    @*                         "GoToNotification", *@
+                    @*                         "ControlPanel", *@
+                    @*                         new {notificationId = notification.Id}, *@
+                    @*                         new {@class=(string) (NotificationRead(notification) ? "read-notification" : "")}) *@
+                    @*                     ; *@
+                    @*                     break; *@
+                    @*                 default: *@
+                    @*                     throw new ArgumentOutOfRangeException(); *@
+                    @*             } *@
+                    @* *@
+                    @*             @if (!NotificationRead(notification)) *@
+                    @*             { *@
+                    @*                 <span class="text-primary ml-2"> *@
+                    @*                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-fill" viewBox="0 0 16 16"> *@
+                    @*                         <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z"/> *@
+                    @*                     </svg> *@
+                    @*                 </span> *@
+                    @*             } *@
+                    @*             else *@
+                    @*             { *@
+                    @*                 <span class="text-secondary ml-2"> *@
+                    @*                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-open-fill" viewBox="0 0 16 16"> *@
+                    @*                         <path d="M8.941.435a2 2 0 0 0-1.882 0l-6 3.2A2 2 0 0 0 0 5.4v.313l6.709 3.933L8 8.928l1.291.717L16 5.715V5.4a2 2 0 0 0-1.059-1.765l-6-3.2zM16 6.873l-5.693 3.337L16 13.372v-6.5zm-.059 7.611L8 10.072.059 14.484A2 2 0 0 0 2 16h12a2 2 0 0 0 1.941-1.516zM0 13.373l5.693-3.163L0 6.873v6.5z"/> *@
+                    @*                     </svg> *@
+                    @*                 </span> *@
+                    @*             } *@
+                    @*         </p> *@
+                    @*         <hr> *@
+                    @*     </li> *@
+                    @* } *@
                     @if (notifications.Count > 0)
                     {
                         <li>
-                            <button class="btn btn-primary col-12" onclick="markNotificationsRead()">Clear Notifications</button>
-                        </li>                        
+                            <button id="clearNotifications" class="btn btn-primary col-12">Clear Notifications</button>
+                        </li>
                     }
                     else
                     {
@@ -116,9 +116,63 @@
     }
 </ul>
 
-<script>
-    function markNotificationsRead(){
-        $.post("@Url.Action("MarkAllNotificationsRead", "ControlPanel", new {userId=UserManager.GetUserId(User)})")
-        .done(() => location.reload());
-    }
-</script>
+@section Scripts
+{
+    <script>
+        function markNotificationsRead(){
+            $.post("@Url.Action("MarkAllNotificationsRead", "ControlPanel", new {userId = UserManager.GetUserId(User)})")
+            .done(() => location.reload());
+        }
+        
+        function addNotification(id, type) {
+            console.log('Notification received', type);
+        
+            switch (type) {
+                
+                case 'NewPost':
+                    $('.notification-container').prepend(
+                        $(`
+                                <li>
+                                    <p>
+                                        <a href="@Url.Action("GoToNotification", "ControlPanel")/?notificationId=${id}">New Post in Thread!</a>
+                                        <span class="text-primary ml-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-fill" viewBox="0 0 16 16">
+                                                <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z"/>
+                                            </svg>
+                                        </span>
+                                    </p>
+                                </li>
+                            `))
+                    break;
+                    
+                case 'PrivateMessage':
+                    $('.notification-container').prepend(
+                        $(`
+                                <li>
+                                    <p>
+                                        <a href="@Url.Action("GoToNotification", "ControlPanel")/?notificationId=${id}">New Private Message!</a>
+                                        <span class="text-primary ml-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-fill" viewBox="0 0 16 16">
+                                                <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z"/>
+                                            </svg>
+                                        </span>
+                                    </p>
+                                </li>
+                            `))
+                    break;
+                    
+                default:
+                    throw new Error('Unknown notification type: ' + type);
+            }   
+        }
+        
+        @foreach (var notification in notifications)
+        {
+            @:addNotification("@notification.Id", "@notification.NotificationType");
+        }
+        
+        $('#clearNotifications').click(function (){
+            markNotificationsRead();
+        });
+    </script>
+}

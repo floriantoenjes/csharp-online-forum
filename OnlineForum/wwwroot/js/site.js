@@ -9,7 +9,7 @@ function setupSignalR()
 {
     const connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
 
-    connection.on("ReceiveMessage", function (user, message) {
+    connection.on("ReceiveMessage", function (id, type) {
 
         const $notificationBell = $('#notification-bell .badge');
         const notificationCount = +$notificationBell.html() || 0;
@@ -17,7 +17,8 @@ function setupSignalR()
         $notificationBell.html(notificationCount + 1);
         $notificationBell.removeClass('d-none');
 
-        console.log(user, message, notificationCount, $notificationBell);
+        console.log(type);
+        addNotification(id, type);
     });
 
     connection.start().then(function () {
