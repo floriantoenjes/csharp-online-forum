@@ -122,6 +122,56 @@
 @section Scripts
 {
     <script>
+        function setupSignalR()
+        {
+            const connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
+        
+            connection.on("ReceiveMessage", function (id, type) {
+        
+                const $notificationBell = $('#notification-bell .badge');
+                const notificationCount = +$notificationBell.html() || 0;
+        
+                $notificationBell.html(notificationCount + 1);
+                $notificationBell.removeClass('d-none');
+        
+                console.log(type);
+                addNotification(id, type);
+            });
+        
+            connection.start().then(function () {
+                console.log('Connected!')
+            }).catch(function (err) {
+                return console.error(err.toString());
+            });
+        }
+        
+        function setupNotificationDropdown() 
+        {
+            const $notificationContainer = $('.notification-container');
+            
+            $notificationContainer.hide();
+            $('*[data-toggle="notification-container"]').click(() => {
+        
+                if ($notificationContainer.is(':hidden')) {
+                    
+                    const $overlay = $("<div id='overlay' style='position: absolute; width: 100vw; height: 100vh; z-index: 10; left: 0; top: 0;'></div>");
+                    $overlay.click(function () {
+                        $(this).remove();
+                        $notificationContainer.hide();
+                    });
+                    
+                    $(document.body).append($overlay);
+                }
+                
+                $notificationContainer.toggle();
+            });
+        }
+        
+        
+        setupSignalR();
+        setupNotificationDropdown();    
+    
+    
         function markNotificationsRead(){
             $.post("@Url.Action("MarkAllNotificationsRead", "ControlPanel", new {userId = UserManager.GetUserId(User)})")
             .done(() => location.reload());
@@ -132,6 +182,7 @@
         
             switch (type) {
                 
+                case 0:
                 case 'NewPost':
                     $('.notification-container').prepend(
                         $(`
@@ -148,6 +199,7 @@
                             `))
                     break;
                     
+                case 1:
                 case 'PrivateMessage':
                     $('.notification-container').prepend(
                         $(`
