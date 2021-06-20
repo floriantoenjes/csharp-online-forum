@@ -20,8 +20,7 @@
         @if (SignInManager.IsSignedIn(User))
         {
             <li class="nav-item">
-                @* <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a> *@
-                <a  class="nav-link text-dark" style="margin-top: 1px">Hello @UserManager.GetUserName(User)!</a>
+                <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
             </li>
             <li class="nav-item mr-4">
                 <form id="logoutForm" class="form-inline" action="@Url.Action("ControlPanel", "ControlPanel", new {area = ""})">
