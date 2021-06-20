@@ -78,10 +78,19 @@ body {
   left: 1em;
 }
 
+.notification-container {
+  left: -10em;
+  z-index: 15;
+}
+
 .notification-container ul {
-  width: 15em; 
+  width: 20em; 
   max-height: 26em; 
   overflow-y: scroll;
+}
+
+#notification-bell {
+  cursor: pointer;
 }
 
 .read-notification {
@@ -90,4 +99,17 @@ body {
 
 .read-notification:hover {
   color: #0366d6;
+}
+
+#manage {
+  margin-top: 1px;
+}
+
+#overlay {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10;
+  left: 0;
+  top: 0;
 }
