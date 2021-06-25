@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using OnlineForum.Models;
@@ -40,7 +41,9 @@ namespace OnlineForum.Controllers
             if (ModelState.IsValid)
             {
                 _threadService.CreatePost(threadId, post, this.CurrentUserId());
-                var subscribers = _threadService.GetThread(threadId).Subscribers;
+                var subscribers = _threadService.GetThread(threadId).Subscribers
+                    .Where(subscriber => subscriber.Id != this.CurrentUserId()).ToList();
+                
                 _notificationService.CreateNotification(subscribers, NotificationType.NewPost, threadId);
             }
 

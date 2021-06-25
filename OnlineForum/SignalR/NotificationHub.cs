@@ -8,7 +8,7 @@ namespace OnlineForum.SignalR
     {
         public async Task Notify(NotificationType type)
         {
-            await Clients.All.SendAsync("ReceiveMessage", type);
+            await Clients.Others.SendAsync("ReceiveMessage", type);
         }
     }
 }
