@@ -91,6 +91,9 @@ body {
 
 #notification-bell {
   cursor: pointer;
+  top: 4px;
+  position: relative;
+  display: inline-block;
 }
 
 .read-notification {

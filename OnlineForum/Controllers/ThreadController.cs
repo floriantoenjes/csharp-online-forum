@@ -1,10 +1,8 @@
 ﻿using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR;
 using OnlineForum.Models;
 using OnlineForum.Services;
-using OnlineForum.SignalR;
 
 namespace OnlineForum.Controllers
 {
@@ -58,7 +56,6 @@ namespace OnlineForum.Controllers
             _threadService.SubscribeToThread(threadId, this.CurrentUserId());
 
             return Ok();
-            // return RedirectToAction("Thread", new {threadId});
         }
         
         [HttpPost]
@@ -68,7 +65,6 @@ namespace OnlineForum.Controllers
             _threadService.UnsubscribeFromThread(threadId, this.CurrentUserId());
 
             return Ok();
-            // return RedirectToAction("Thread", new {threadId});
         }
     }
 }
