@@ -116,3 +116,9 @@ body {
   left: 0;
   top: 0;
 }
+
+.private-messages {
+  min-height: 25em;
+  height: calc(100vh - 38em);
+  overflow-y: scroll;
+}

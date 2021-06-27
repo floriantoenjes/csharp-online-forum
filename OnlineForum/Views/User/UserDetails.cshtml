@@ -6,9 +6,26 @@
 
 <div class="container">
 
-    <div class="text-center">
-        <h1 class="display-4 mb-4">@ViewBag.User.UserName</h1>
-        <h4>@ViewBag.User.UserName's signature: @ViewBag.User.Signature</h4>
+    <div>
+        <h1 class="display-4 mb-4 text-center">@ViewBag.User.UserName</h1>
+        <h6>@ViewBag.User.UserName's signature:</h6>
+        <p>@ViewBag.User.Signature</p>
+    </div>
+    
+    <div class="private-messages mb-4">
+    @foreach (var privateMessage in ViewBag.PrivateMessages)
+    {
+        <div class="card card-body d-flex flex-row">
+            <div class="pr-4 border-right">
+                <p>@privateMessage.Sender.UserName</p>
+                <small>@privateMessage.CreatedAt</small>
+            </div>
+            <div class="ml-5">
+                <h5 class="card-title">@privateMessage.Subject</h5>
+                <p class="card-text">@privateMessage.Body</p>
+            </div>
+        </div>
+    }
     </div>
 
     @using(@Html.BeginForm("SendPrivateMessage", "User", new {recipientId = ViewBag.User.Id}))

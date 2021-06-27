@@ -26,7 +26,8 @@ namespace OnlineForum.Data
             return Context.PrivateMessages
                 .Include(pm => pm.Sender)
                 .Include(pm => pm.Recipient)
-                .Where(pm => pm.SenderId == userId || pm.RecipientId == userId).ToList();
+                .Where(pm => pm.SenderId == userId || pm.RecipientId == userId)
+                .ToList().OrderByDescending(pm => pm.CreatedAt).ToList();
         }
     }
 }
