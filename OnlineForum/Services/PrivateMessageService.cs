@@ -32,6 +32,11 @@ namespace OnlineForum.Services
             return _privateMessageRepository.GetPrivateMessagesByUserId(currentUserId);
         }
 
+        public IList<PrivateMessage> GetConversation(int currentUserId, int otherUserId)
+        {
+            return _privateMessageRepository.GetConversation(currentUserId, otherUserId);
+        }
+
         public IDictionary<string, List<PrivateMessage>> GetConversationsByUserId(int currentUserId)
         {
             var privateMessages = _privateMessageRepository.GetPrivateMessagesByUserId(currentUserId);

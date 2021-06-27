@@ -32,7 +32,8 @@ namespace OnlineForum.Controllers
         public IActionResult UserDetails(int userId)
         {
             ViewBag.User = _userService.GetUser(userId);
-            ViewBag.PrivateMessages = _privateMessageService.GetPrivateMessagesByUserId(this.CurrentUserId());
+            // ViewBag.PrivateMessages = _privateMessageService.GetPrivateMessagesByUserId(this.CurrentUserId());
+            ViewBag.PrivateMessages = _privateMessageService.GetConversation(this.CurrentUserId(), userId);
 
             return View();
         }

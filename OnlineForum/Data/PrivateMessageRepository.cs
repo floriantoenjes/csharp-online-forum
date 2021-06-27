@@ -29,5 +29,22 @@ namespace OnlineForum.Data
                 .Where(pm => pm.SenderId == userId || pm.RecipientId == userId)
                 .ToList().OrderByDescending(pm => pm.CreatedAt).ToList();
         }
+
+        public IList<PrivateMessage> GetConversation(int currentUserId, int otherUserId)
+        {
+            var messagesSent = Context.PrivateMessages
+                .Include(pm => pm.Sender)
+                .Include(pm => pm.Recipient)
+                .Where(pm => pm.SenderId == currentUserId && pm.RecipientId == otherUserId)
+                .ToList();
+            
+            var messagesReceived = Context.PrivateMessages
+                .Include(pm => pm.Sender)
+                .Include(pm => pm.Recipient)
+                .Where(pm => pm.SenderId == otherUserId && pm.RecipientId == currentUserId)
+                .ToList();
+
+            return messagesSent.Concat(messagesReceived).OrderByDescending(pm => pm.CreatedAt).ToList();
+        }
     }
 }
