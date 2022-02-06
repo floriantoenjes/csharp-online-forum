@@ -12,12 +12,14 @@ namespace OnlineForum.Controllers
     {
         private readonly BoardService _boardService;
         
-        public BoardController(BoardService boardService)
+        private readonly ThreadService _threadService;
+
+        public BoardController(BoardService boardService, ThreadService threadService)
         {
             _boardService = boardService;
-            
+            _threadService = threadService;
         }
-        
+
         public IActionResult BoardOverview()
         {
             ViewBag.Boards = _boardService.GetAllBoards();
@@ -36,12 +38,15 @@ namespace OnlineForum.Controllers
             return RedirectToAction("BoardOverview");
         }
         
-        public IActionResult BoardDetail(int boardId)
+        public IActionResult BoardDetail(int boardId, int page = 0, int limit = 5)
         {
             var board = _boardService.GetBoard(boardId);
-            
+            var threads = _threadService.GetThreadsByBoardId(boardId, page, limit);
+
             var boardDetailViewModel = new BoardDetailViewModel();
             boardDetailViewModel.Board = board;
+            boardDetailViewModel.Threads = threads;
+            boardDetailViewModel.Limit = limit;
 
             return View(boardDetailViewModel);
         }

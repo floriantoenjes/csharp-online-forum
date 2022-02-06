@@ -7,7 +7,11 @@ namespace OnlineForum.ViewModels
     {
         public Board Board { get; set; }
         
+        public IList<Thread> Threads { get; set; }
+
         public Thread Thread { get; set; }
+        
+        public int Limit { get; set; }
         
         public Post Post { get; set; }
     }

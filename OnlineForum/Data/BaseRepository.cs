@@ -42,7 +42,7 @@ namespace OnlineForum.Data
             return HandleIncludes(dbSet).ToList();
         }
 
-        protected IQueryable<TEntity> BuildPaginatedQuery(IQueryable<TEntity> queryable, int offset, int limit)
+        private IQueryable<TEntity> BuildPaginatedQuery(IQueryable<TEntity> queryable, int offset, int limit)
         {
             if (offset != 0 || limit != 0)
             {

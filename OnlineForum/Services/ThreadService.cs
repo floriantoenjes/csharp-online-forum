@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Storage;
 using OnlineForum.Data;
 using OnlineForum.Models;
@@ -27,6 +28,12 @@ namespace OnlineForum.Services
         public Thread GetThread(int threadId)
         {
             return _threadRepository.Get(threadId);
+        }
+
+        public IList<Thread> GetThreadsByBoardId(int boardId, int offset = 0, int limit = 5)
+        {
+            Console.WriteLine(boardId);
+            return _threadRepository.GetListByQuery(thread => thread.BoardId == boardId, offset, limit);
         }
 
         public void CreateThread(int boardId, Thread thread)

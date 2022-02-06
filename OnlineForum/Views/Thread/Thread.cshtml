@@ -48,7 +48,7 @@
                 }
                 else
                 {
-                    @Html.ActionLink((string)pageNumber.ToString(), "thread", "Thread", new { threadId = ViewBag.Thread.Id, page = pageNumber - 1, limit = ViewBag.limit })                    
+                    @Html.ActionLink((string)pageNumber.ToString(), "Thread", "Thread", new { threadId = ViewBag.Thread.Id, page = pageNumber - 1, limit = ViewBag.limit })                    
                 }
             }
         </div>
@@ -63,7 +63,7 @@
                 }
                 else
                 {
-                    <span>@Html.ActionLink((string)(postsShown * 5).ToString(), "thread", "Thread", new { threadId = ViewBag.Thread.Id, page = 0, limit = postsShown * 5 })</span>                    
+                    <span>@Html.ActionLink((string)(postsShown * 5).ToString(), "Thread", "Thread", new { threadId = ViewBag.Thread.Id, page = 0, limit = postsShown * 5 })</span>                    
                 }
             }
         </div>

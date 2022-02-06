@@ -9,39 +9,54 @@
     </div>
 
     <div>
-        @foreach (var thread in Model.Board.Threads)
+        @foreach (var thread in Model.Threads)
         {
             <article class="row border p-4 my-4">
                 <div class="col-9">
-                    <h5>@Html.ActionLink( thread.Name, "Thread", "Thread", new {threadId = thread.Id})</h5>
+                    <h5>@Html.ActionLink(thread.Name, "Thread", "Thread", new { threadId = thread.Id })</h5>
                     <p>Replys: @thread.Posts.Count</p>
                 </div>
                 <aside class="col-3">
-                    <p>by @Html.ActionLink(  thread.Creator.UserName, "UserDetails", "User", new {userId = thread.Creator.Id})</p>
+                    <p>by @Html.ActionLink(thread.Creator.UserName, "UserDetails", "User", new { userId = thread.Creator.Id })</p>
                     <p>at @thread.CreatedAt</p>
                 </aside>
             </article>
         }
     </div>
+
+    <div class="mb-4">
+        <span>Threads shown:</span>
+        @foreach (var threadsShown in Enumerable.Range(1, 3))
+        {
+            if (Model.Limit == threadsShown * 25)
+            {
+                @(threadsShown * 25)
+            }
+            else
+            {
+                <span>@Html.ActionLink((string)(threadsShown * 25).ToString(), "BoardDetail", "Board", new { boardId = Model.Board.Id, page = 0, limit = threadsShown * 25 })</span>
+            }
+        }
+    </div>
 </div>
 
 <div>
-    @using (Html.BeginForm("CreateThread", "Board", new {boardId = Model.Board.Id}))
+    @using (Html.BeginForm("CreateThread", "Board", new { boardId = Model.Board.Id }))
     {
         <div class="row">
             <div class="col-6 form-group">
-                @Html.LabelFor(m => m.Thread.Name, new {@class = "control-label"})
-                @Html.TextBoxFor(m => m.Thread.Name, new {@class = "form-control"})
+                @Html.LabelFor(m => m.Thread.Name, new { @class = "control-label" })
+                @Html.TextBoxFor(m => m.Thread.Name, new { @class = "form-control" })
             </div>
         </div>
-        
+
         <div class="row">
             <div class="col-6 form-group">
-                @Html.LabelFor(m => m.Post.Content, new {@class = "control-label"})
-                @Html.TextAreaFor(m => m.Post.Content, new {@class = "form-control"})
+                @Html.LabelFor(m => m.Post.Content, new { @class = "control-label" })
+                @Html.TextAreaFor(m => m.Post.Content, new { @class = "form-control" })
             </div>
         </div>
-        
+
         <button class="btn btn-primary" type="submit">Create Thread</button>
     }
 </div>
