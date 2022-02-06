@@ -38,7 +38,7 @@ namespace OnlineForum.Controllers
             return RedirectToAction("BoardOverview");
         }
         
-        public IActionResult BoardDetail(int boardId, int page = 0, int limit = 5)
+        public IActionResult BoardDetail(int boardId, int page = 0, int limit = 25)
         {
             var board = _boardService.GetBoard(boardId);
             var threads = _threadService.GetThreadsByBoardId(boardId, page, limit);
