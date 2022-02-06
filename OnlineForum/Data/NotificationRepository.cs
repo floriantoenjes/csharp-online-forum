@@ -15,11 +15,6 @@ namespace OnlineForum.Data
             return Context.Notifications.Find(id);
         }
 
-        public override IList<Notification> GetList()
-        {
-            return Context.Notifications.ToList();
-        }
-
         public IList<Notification> GetNotificationsByUserId(int userId)
         {
             return Context.Notifications.Where(n => n.Receivers.Any(r => r.Id == userId)).ToList();

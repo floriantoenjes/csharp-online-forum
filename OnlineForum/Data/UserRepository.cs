@@ -17,10 +17,5 @@ namespace OnlineForum.Data
                 .Include(u => u.Subscriptions)
                 .SingleOrDefault(user => user.Id == id);
         }
-
-        public override IList<User> GetList()
-        {
-            return Context.Users.ToList();
-        }
     }
 }

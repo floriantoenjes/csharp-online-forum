@@ -15,15 +15,13 @@ namespace OnlineForum.Data
         {
             return Context.Threads.Where(thread => thread.Id == id)
                 .Include(thread => thread.Board)
-                .Include(thread => thread.Posts)
-                .ThenInclude(post => post.Creator)
                 .Include(thread => thread.Creator)
                 .Include(thread => thread.Subscribers).SingleOrDefault();
         }
 
-        public override IList<Thread> GetList()
+        protected override IEnumerable<Thread> HandleIncludes(IQueryable<Thread> queryable)
         {
-            return Context.Threads.Include(thread => thread.Creator).ToList();
+            return queryable.Include(thread => thread.Creator);
         }
     }
 }

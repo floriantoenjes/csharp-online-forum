@@ -21,10 +21,10 @@ namespace OnlineForum.Data
                 .SingleOrDefault();
         }
 
-        public override IList<Board> GetList()
+        protected override IEnumerable<Board> HandleIncludes(IQueryable<Board> queryable)
         {
-            return Context.Boards.Include(b => b.LastThread)
-                .ThenInclude(t => t.Creator).ToList();
+            return queryable.Include(b => b.LastThread)
+                .ThenInclude(t => t.Creator);
         }
     }
 }

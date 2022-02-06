@@ -11,9 +11,9 @@ namespace OnlineForum.Data
     {
         TEntity Get(int id);
 
-        IList<TEntity> GetList();
+        IList<TEntity> GetList(int offset = 0, int limit = 0);
         
-        IList<TEntity> GetListByQuery(Expression<Func<TEntity,bool>> predicate);
+        IList<TEntity> GetListByQuery(Expression<Func<TEntity,bool>> predicate, int offset = 0, int limit = 0);
 
         void Add(TEntity entity);
 

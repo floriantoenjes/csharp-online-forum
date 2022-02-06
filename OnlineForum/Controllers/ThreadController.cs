@@ -10,22 +10,30 @@ namespace OnlineForum.Controllers
     {
         private readonly ThreadService _threadService;
 
+        private readonly PostService _postService;
+        
+
         private readonly UserService _userService;
 
         private readonly NotificationService _notificationService;
 
-        public ThreadController(ThreadService threadService, UserService userService, NotificationService notificationService)
+        public ThreadController(ThreadService threadService, PostService postService, UserService userService, NotificationService notificationService)
         
         {
             _threadService = threadService;
+            _postService = postService;
             _userService = userService;
             _notificationService = notificationService;
         }
         
-        public IActionResult Thread(int threadId)
+        public IActionResult Thread(int threadId, int page = 0, int limit = 10)
         {
             var thread = _threadService.GetThread(threadId);
             ViewBag.Thread = thread;
+            ViewBag.posts = _postService.GetPostsByThreadId(threadId, page * limit, limit);
+            ViewBag.totalPostCount = _postService.GetPostsBbyThreadIdTotalCount(threadId);
+            ViewBag.limit = limit;
+            ViewBag.currentPage = page;
             var currentUser = _userService.GetUser(this.CurrentUserId()); 
             ViewBag.CurrentUser = currentUser;
 

@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
+using OnlineForum.Models;
 
 namespace OnlineForum.Data
 {
@@ -32,12 +33,42 @@ namespace OnlineForum.Data
 
         public abstract TEntity Get(int id);
 
-        public abstract IList<TEntity> GetList();
+        public virtual IList<TEntity> GetList(int offset = 0, int limit = 0)
+        {
+            IQueryable<TEntity> dbSet = Context.Set<TEntity>();
 
-        public IList<TEntity> GetListByQuery( Expression<Func<TEntity,bool>> predicate)
+            dbSet = BuildPaginatedQuery(dbSet, offset, limit);
+
+            return HandleIncludes(dbSet).ToList();
+        }
+
+        protected IQueryable<TEntity> BuildPaginatedQuery(IQueryable<TEntity> queryable, int offset, int limit)
+        {
+            if (offset != 0 || limit != 0)
+            {
+                if (offset != 0)
+                {
+                    queryable = queryable.Skip(offset);
+                }
+
+                if (limit != 0)
+                {
+                    queryable = queryable.Take(limit);
+                }
+            }
+
+            return queryable;
+        }
+
+        protected virtual IEnumerable<TEntity> HandleIncludes(IQueryable<TEntity> queryable)
+        {
+            return queryable;
+        }
+
+        public IList<TEntity> GetListByQuery( Expression<Func<TEntity,bool>> predicate, int offset = 0, int limit = 0)
         {
             var set = Context.Set<TEntity>();
-            return set.Where(predicate).ToList();
+            return HandleIncludes(BuildPaginatedQuery(set.Where(predicate), offset, limit)).ToList();
         }
 
         public void Update(TEntity entity)

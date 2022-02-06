@@ -16,11 +16,6 @@ namespace OnlineForum.Data
             return Context.PrivateMessages.SingleOrDefault(pm => pm.Id == id);
         }
 
-        public override IList<PrivateMessage> GetList()
-        {
-            return Context.PrivateMessages.ToList();
-        }
-
         public IList<PrivateMessage> GetPrivateMessagesByUserId(int userId)
         {
             return Context.PrivateMessages
