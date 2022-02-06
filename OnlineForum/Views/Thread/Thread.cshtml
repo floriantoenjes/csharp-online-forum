@@ -1,4 +1,7 @@
-﻿@model OnlineForum.Models.Post
+﻿@using Microsoft.AspNetCore.Identity
+@model OnlineForum.Models.Post
+
+@inject SignInManager<User> SignInManager
 
 @{
     bool HasSubscription()
@@ -81,8 +84,11 @@
             <div class="col-12">
                 <button class="btn btn-primary mr-4" type="submit">Create Post</button>
 
-                <button id="subscribe-btn" class="btn btn-success" style="display: @(!HasSubscription() ? "" : "none")" onclick="subscribeToThread()" type="button">Subscribe to Thread</button>
-                <button id="unsubscribe-btn" class="btn btn-danger" style="display: @(HasSubscription() ? "" : "none")" onclick="unsubscribeFromThread()" type="button">Unsubscribe from Thread</button>
+                @if(SignInManager.IsSignedIn(User))
+                {
+                    <button id="subscribe-btn" class="btn btn-success" style="display: @(!HasSubscription() ? "" : "none")" onclick="subscribeToThread()" type="button">Subscribe to Thread</button>
+                    <button id="unsubscribe-btn" class="btn btn-danger" style="display: @(HasSubscription() ? "" : "none")" onclick="unsubscribeFromThread()" type="button">Unsubscribe from Thread</button>                    
+                }
             </div>
         </div>
     }
