@@ -1,4 +1,7 @@
-﻿@model OnlineForum.ViewModels.BoardDetailViewModel
+﻿@using Microsoft.AspNetCore.Identity
+@model OnlineForum.ViewModels.BoardDetailViewModel
+
+@inject SignInManager<User> SignInManager
 
 <div>
     <div class="row">
@@ -40,23 +43,26 @@
     </div>
 </div>
 
-<div>
-    @using (Html.BeginForm("CreateThread", "Board", new { boardId = Model.Board.Id }))
-    {
-        <div class="row">
-            <div class="col-6 form-group">
-                @Html.LabelFor(m => m.Thread.Name, new { @class = "control-label" })
-                @Html.TextBoxFor(m => m.Thread.Name, new { @class = "form-control" })
+@if(SignInManager.IsSignedIn(User))
+{
+    <div>
+        @using (Html.BeginForm("CreateThread", "Board", new { boardId = Model.Board.Id }))
+        {
+            <div class="row">
+                <div class="col-6 form-group">
+                    @Html.LabelFor(m => m.Thread.Name, new { @class = "control-label" })
+                    @Html.TextBoxFor(m => m.Thread.Name, new { @class = "form-control" })
+                </div>
             </div>
-        </div>
 
-        <div class="row">
-            <div class="col-6 form-group">
-                @Html.LabelFor(m => m.Post.Content, new { @class = "control-label" })
-                @Html.TextAreaFor(m => m.Post.Content, new { @class = "form-control" })
+            <div class="row">
+                <div class="col-6 form-group">
+                    @Html.LabelFor(m => m.Post.Content, new { @class = "control-label" })
+                    @Html.TextAreaFor(m => m.Post.Content, new { @class = "form-control" })
+                </div>
             </div>
-        </div>
 
-        <button class="btn btn-primary" type="submit">Create Thread</button>
-    }
-</div>
+            <button class="btn btn-primary" type="submit">Create Thread</button>
+        }
+    </div>
+}

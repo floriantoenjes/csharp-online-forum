@@ -72,25 +72,25 @@
         </div>
     </div>
 
-    @using (Html.BeginForm("CreatePost", "Thread", new { threadId = ViewBag.Thread.Id }))
+    @if(SignInManager.IsSignedIn(User))
     {
-        <div class="row">
-            <div class="col-12 form-group">
-                @Html.LabelFor(post => post.Content, new { @class = "control-label" })
-                @Html.TextAreaFor(post => post.Content, new { @class = "form-control", @rows = 5 })
+        @using (Html.BeginForm("CreatePost", "Thread", new { threadId = ViewBag.Thread.Id }))
+        {
+            <div class="row">
+                <div class="col-12 form-group">
+                    @Html.LabelFor(post => post.Content, new { @class = "control-label" })
+                    @Html.TextAreaFor(post => post.Content, new { @class = "form-control", @rows = 5 })
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <button class="btn btn-primary mr-4" type="submit">Create Post</button>
+            <div class="row">
+                <div class="col-12">
+                    <button class="btn btn-primary mr-4" type="submit">Create Post</button>
 
-                @if(SignInManager.IsSignedIn(User))
-                {
                     <button id="subscribe-btn" class="btn btn-success" style="display: @(!HasSubscription() ? "" : "none")" onclick="subscribeToThread()" type="button">Subscribe to Thread</button>
-                    <button id="unsubscribe-btn" class="btn btn-danger" style="display: @(HasSubscription() ? "" : "none")" onclick="unsubscribeFromThread()" type="button">Unsubscribe from Thread</button>                    
-                }
+                    <button id="unsubscribe-btn" class="btn btn-danger" style="display: @(HasSubscription() ? "" : "none")" onclick="unsubscribeFromThread()" type="button">Unsubscribe from Thread</button>
+                </div>
             </div>
-        </div>
+        }
     }
 </div>
 <script>

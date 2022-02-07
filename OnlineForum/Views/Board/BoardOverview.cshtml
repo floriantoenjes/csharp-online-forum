@@ -1,4 +1,8 @@
-﻿@model OnlineForum.Models.Board
+﻿@using Microsoft.AspNetCore.Identity
+@model OnlineForum.Models.Board
+
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
 
 @{
     ViewData["Title"] = "Home Page";
@@ -33,14 +37,25 @@
             }
     </div>
 
-    @using (Html.BeginForm("CreateBoard", "Board"))
+    @if (SignInManager.IsSignedIn(User))
     {
-        <div class="row">
-            <div class="col-4 form-group">
-                @Html.LabelFor(b => b.Name, new {@class = "control-label"})
-                @Html.TextBoxFor(b => b.Name, new {@class = "form-control"})
-            </div>
-        </div>
-        <button class="btn btn-primary" type="submit">Create Board</button>
+        var currentUser = await UserManager.GetUserAsync(User);
+
+        var isAdmin = currentUser != null
+                      && await UserManager.IsInRoleAsync(currentUser, "admin");
+
+        @if (isAdmin)
+        {
+            @using (Html.BeginForm("CreateBoard", "Board"))
+            {
+                <div class="row">
+                    <div class="col-4 form-group">
+                        @Html.LabelFor(b => b.Name, new { @class = "control-label" })
+                        @Html.TextBoxFor(b => b.Name, new { @class = "form-control" })
+                    </div>
+                </div>
+                <button class="btn btn-primary" type="submit">Create Board</button>
+            }
+        }
     }
 </div>
